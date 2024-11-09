@@ -15,6 +15,7 @@ class User(Base):
     cre_date = Column(DateTime, nullable=False, server_default=text('NOW()'))
     quizzes = relationship('Quiz',uselist=True)
     notes = relationship('Note', back_populates='owner', uselist=True, cascade='all, delete-orphan')
+    flashcards = relationship('Note', back_populates='owner', uselist=True, cascade='all, delete-orphan')
     attempts = relationship('Attempt', back_populates='user', uselist=True,
                             cascade='all, delete-orphan')
 

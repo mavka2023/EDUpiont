@@ -31,6 +31,7 @@ class DatabaseService:
                                           .options(selectinload(User.notes))
                                           .options(selectinload(User.attempts))
                                           .options(selectinload(User.quizzes))
+                                          .options(selectinload(User.flashcards))
                                           .where(User.email == user_email))).scalars().first()
 
     async def get_user_by_id(self, user_id: int) -> User:
@@ -42,8 +43,11 @@ class DatabaseService:
         session: AsyncSession = None
         async with self.session_maker() as session:
             user = (await session.execute(
-                select(User).options(joinedload(User.notes)).options(joinedload(User.attempts)).options(
-                    joinedload(User.quizzes))
+                select(User)
+                .options(joinedload(User.notes))
+                .options(joinedload(User.attempts))
+                .options(joinedload(User.quizzes))
+                .options(joinedload(User.flashcards))
                 .where(User.id == user_id))).scalars().first()
             return user
 

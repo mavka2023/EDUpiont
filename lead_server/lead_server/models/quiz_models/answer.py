@@ -11,6 +11,7 @@ class Answer(Base):
     id = Column(Integer, primary_key=True)
     text = Column(String)
     is_correct = Column(Boolean)
+    answer_type = Column(String)
     question_id = Column(Integer, ForeignKey('questions.id'))
 
     def __repr__(self):
