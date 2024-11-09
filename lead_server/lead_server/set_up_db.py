@@ -8,12 +8,3 @@ engine = sqlalchemy.create_engine(conn_string)
 initialize_orm(engine)
 
 print('Database initialized')
-
-# from models import User
-#
-#
-# with Session(engine) as session:
-#     user = User(username='admin',email='admin@edupoint.pl',password_hash=User.hash_password('admin'))
-#     session.add(user)
-#     session.commit()
-
