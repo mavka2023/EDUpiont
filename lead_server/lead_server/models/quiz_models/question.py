@@ -1,4 +1,3 @@
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 
@@ -11,6 +10,7 @@ class Question(Base):
     id = Column(Integer, primary_key=True)
     question = Column(String)
     quiz_id = Column(Integer, ForeignKey('quizzes.id'))
+    resource_url = Column(String)
     answers = relationship('Answer',
                            primaryjoin='Question.id == Answer.question_id',
                            uselist=True,
@@ -23,7 +23,7 @@ class Question(Base):
     @classmethod
     def from_dict(cls, data):
         self = cls()
-        for field in ['question']:
+        for field in ['question', 'quiz_id', 'resource_url']:
             if field in data:
                 setattr(self, field, data[field])
         if 'answers' in data:

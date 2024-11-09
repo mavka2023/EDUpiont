@@ -17,7 +17,7 @@ def get_user_router(db_service: DatabaseService, jwt_secret: str):
             return {"error": "You are not authorized to access this resource"}
         return await db_service.get_full_user_by_id(user_id)
 
-    @user_router.post("/create")
+    @user_router.post("/")
     async def create_user(request: Request):
         user = await request.json()
         user['password_hash'] = User.hash_password(user['password'])

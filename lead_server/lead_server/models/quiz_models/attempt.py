@@ -16,3 +16,9 @@ class Attempt(Base):
 
     def __repr__(self):
         return f'Atempt(id={self.id}, user_id={self.user_id}, attempt={self.attempt})'
+
+    def from_dict(self, data):
+        for field in ['user_id', 'attempt', 'start_date']:
+            if field in data:
+                setattr(self, field, data[field])
+        return self
