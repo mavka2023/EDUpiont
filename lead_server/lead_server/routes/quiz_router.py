@@ -27,7 +27,21 @@ def get_quiz_router(db_service: DatabaseService, jwt_secret: str):
     @jwt_required
     async def create_quiz(request: Request):
         user = request.state.user
-        quiz = await db_service.create_quiz(Quiz.from_dict(await request.json()), user.id)
+        quiz = await db_service.create_quiz(await request.json(), user.id)
         return quiz
+
+    @quiz_router.put("/{quiz_id}")
+    @jwt_required
+    async def update_quiz(quiz_id: int, request: Request):
+        user = request.state.user
+        quiz = await db_service.update_quiz(quiz_id, await request.json(), user.id)
+        return quiz
+
+    @quiz_router.delete("/{quiz_id}")
+    @jwt_required
+    async def delete_quiz(quiz_id: int, request: Request):
+        user = request.state.user
+        await db_service.delete_quiz_by_id(quiz_id, user.id)
+        return Response(status_code=204)
 
     return quiz_router

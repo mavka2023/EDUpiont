@@ -14,9 +14,9 @@ class User(Base):
     username = Column(String, nullable=False)
     cre_date = Column(DateTime, nullable=False, server_default=text('NOW()'))
     quizzes = relationship('Quiz',uselist=True)
-    notes = relationship('Note', back_populates='owner', uselist=True, cascade='all, delete-orphan')
-    flashcards = relationship('Flashcard', back_populates='owner', uselist=True, cascade='all, delete-orphan')
-    attempts = relationship('Attempt', back_populates='user', uselist=True,
+    notes = relationship('Note', uselist=True, cascade='all, delete-orphan')
+    flashcards = relationship('FlashcardDeck', uselist=True, cascade='all, delete-orphan')
+    attempts = relationship('Attempt', uselist=True,
                             cascade='all, delete-orphan')
 
     def __repr__(self):
