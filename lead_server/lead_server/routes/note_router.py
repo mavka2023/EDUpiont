@@ -34,7 +34,15 @@ def get_note_router(db_service: DatabaseService, jwt_secret: str):
         note_id = int(request.path_params['note_id'])
         user = request.state.user
         data = await request.json()
-        note = await db_service.update_note_by_id(note_id, data)
+        note = await db_service.update_note_by_id(note_id, data, user.id)
         return note
+
+    @router.delete("/{note_id}")
+    @jwt_required
+    async def delete_note(request: Request, response: Response):
+        note_id = int(request.path_params['note_id'])
+        user = request.state.user
+        await db_service.delete_note_by_id(note_id, user.id)
+        return Response(status_code=204)
 
     return router

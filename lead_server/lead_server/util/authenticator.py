@@ -11,6 +11,8 @@ def jwt_gateway_factory(db_service, JWT_SECRET, JWT_EXPIRATION=24*3600):
         async def jwt_auth_wrapper(*args, **kwargs):
             try:
                 request = kwargs["request"]
+                if "Authorization" not in request.headers:
+                    return HTTPException(401, "Token required")
                 token = request.headers.get("Authorization").split(" ")[1]
                 payload = jwt.decode(token, JWT_SECRET, algorithms=["HS256"])
                 if payload["cre_timestamp"] + JWT_EXPIRATION < time.time():
@@ -21,6 +23,6 @@ def jwt_gateway_factory(db_service, JWT_SECRET, JWT_EXPIRATION=24*3600):
                 request.state.user = user
                 return await function(*args, **kwargs)
             except Exception as e:
-                raise HTTPException(status_code=401, detail="Invalid token")
+                raise HTTPException(status_code=500, detail="Unknown error occurred")
         return jwt_auth_wrapper
     return jwt_auth_required_decorator
