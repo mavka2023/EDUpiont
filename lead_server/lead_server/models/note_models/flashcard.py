@@ -12,7 +12,7 @@ class Flashcard(Base):
     text = Column(String, nullable=False) # Flashcard text in Markdown format
     title = Column(String, nullable=False)
     owner_id = Column(Integer, ForeignKey('users.id'))
-    owner = relationship("User", back_populates="notes",uselist=False)
+    owner = relationship("User", back_populates="flashcards",uselist=False)
 
 
     def from_dict(self, data):
