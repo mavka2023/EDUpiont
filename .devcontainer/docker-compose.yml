@@ -1,0 +1,30 @@
+services:
+  dev-env:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    ports:
+      - "0.0.0.0:8080:8080" # LeadServer
+    networks:
+        - devcontainer
+    depends_on:
+      - database
+    links:
+      - database:database
+
+
+  database:
+    image: postgres:17
+    environment:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        POSTGRES_DB: postgres
+    ports:
+      - "0.0.0.0:5432:5432"
+    networks:
+      - devcontainer
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+networks:
+    devcontainer:
+        driver: bridge
