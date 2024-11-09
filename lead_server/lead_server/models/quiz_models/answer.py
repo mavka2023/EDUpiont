@@ -12,6 +12,7 @@ class Answer(Base):
     text = Column(String)
     is_correct = Column(Boolean)
     answer_type = Column(String)
+    required_answer = Column(String)
     question_id = Column(Integer, ForeignKey('questions.id'))
 
     def __repr__(self):
@@ -20,7 +21,7 @@ class Answer(Base):
     @classmethod
     def from_dict(cls,data):
         self = cls()
-        for field in ['text', 'is_correct']:
+        for field in ['text', 'is_correct', 'answer_type', 'required_answer']:
             if field in data:
                 setattr(self, field, data[field])
         return self

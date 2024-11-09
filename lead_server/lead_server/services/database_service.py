@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession, AsyncEngine
 from sqlalchemy.orm import selectinload, lazyload, joinedload
 from typing import List
-from lead_server.models import User, Quiz, Note, Flashcard, Question
+from lead_server.models import User, Quiz, Note, Flashcard, Question, Answer
 from sqlalchemy.future import select
 
 from lead_server.models.flashcard_models.flashcard_deck import FlashcardDeck
@@ -56,7 +56,9 @@ class DatabaseService:
     async def get_quiz_by_id(self, quiz_id: int, user_id: int) -> Quiz:
         async with self.session_maker() as session:
             return (await session.execute(
-                select(Quiz).where(Quiz.id == quiz_id).where(Quiz.owner_id == user_id))).scalars().first()
+                select(Quiz).where(Quiz.id == quiz_id)
+                .options(selectinload(Quiz.questions).selectinload(Question.answers))
+                .where(Quiz.owner_id == user_id))).scalars().first()
 
     async def get_full_quiz_by_id(self, quiz_id: int, user_id: int) -> Quiz:
         async with self.session_maker() as session:
