@@ -69,6 +69,7 @@ def get_quiz_router(db_service: DatabaseService, jwt_secret: str):
         quiz = await db_service.update_quiz(quiz_id, await request.json(), user.id)
         return quiz
 
+    #@quiz_router.delete("/{quiz_id}") # We don't want to delete quizzes
     @quiz_router.delete("/{quiz_id}")
     @jwt_required
     async def delete_quiz(quiz_id: int, request: Request):

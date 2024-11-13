@@ -1,9 +1,10 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession, AsyncEngine
 from sqlalchemy.orm import selectinload, lazyload, joinedload
 from typing import List
-from lead_server.models import User, Quiz, Note, Flashcard, Question, Answer
+from lead_server.models import User, Quiz, Note, Flashcard, Question, Answer, Attempt
 from sqlalchemy.future import select
 
+from lead_server.models.calendar_models.calendar_event import CalendarEvent
 from lead_server.models.flashcard_models.flashcard_deck import FlashcardDeck
 
 
@@ -108,6 +109,11 @@ class DatabaseService:
         async with self.session_maker() as session:
             return (await session.execute(select(Note).where(Note.owner_id == user_id))).scalars().all()
 
+    async def get_events_by_user_id(self, user_id: int):
+        async with self.session_maker() as session:
+            return (await session.execute(select(CalendarEvent).where(CalendarEvent.owner_id == user_id))).scalars().all()
+
+
     async def add_note_to_user(self, note: dict, user_id: int):
         async with self.session_maker() as session:
             note = Note.from_dict(note)
@@ -117,6 +123,17 @@ class DatabaseService:
             session.add(user)
             await session.commit()
             return note
+
+    async def add_event_to_user(self, event: dict, user_id: int):
+        async with self.session_maker() as session:
+            event = CalendarEvent.from_dict(event)
+            user = (await session.execute(
+                select(User).options(joinedload(User.calendar_events)).where(User.id == user_id))).scalars().first()
+            user.calendar_events.append(event)
+            session.add(user)
+            await session.commit()
+            return event
+
 
     async def update_note_by_id(self, note_id: int, note_update: dict, user_id: int):
         async with self.session_maker() as session:
@@ -130,6 +147,21 @@ class DatabaseService:
             session.add(note)
             await session.commit()
             return note
+
+
+    async def update_event_by_id(self, event_id: int, event_update: dict, user_id: int):
+        async with self.session_maker() as session:
+            event = (await session.get(CalendarEvent, event_id))
+            if event.owner_id != user_id:
+                raise Exception("User does not own this event")
+            for key, value in event_update.items():
+                setattr(event, key, value)
+            if event.id != event_id:
+                raise Exception("User cannot update event with different id")
+            session.add(event)
+            await session.commit()
+            return event
+
 
     async def get_flashcard_decks_by_user_id(self, user_id: int):
         async with self.session_maker() as session:
@@ -190,6 +222,15 @@ class DatabaseService:
             await session.delete(note)
             await session.commit()
 
+    async def delete_event_by_id(self, event_id, id):
+        async with self.session_maker() as session:
+            event = await session.get(CalendarEvent, event_id)
+            if event.owner_id != id:
+                raise Exception("User does not own this event")
+            await session.delete(event)
+            await session.commit()
+
+
     async def delete_quiz_by_id(self, quiz_id, id):
         async with self.session_maker() as session:
             quiz = await session.get(Quiz, quiz_id)
@@ -197,6 +238,29 @@ class DatabaseService:
                 raise Exception("User does not own this quiz")
             await session.delete(quiz)
             await session.commit()
+
+    async def start_attempt(self,user_id,quiz_id):
+        async with self.session_maker() as session:
+            attempt = Attempt.new_attempt(user_id,quiz_id)
+            session.add(attempt)
+            await session.commit()
+            return attempt
+
+    async def submit_attempt(self,user_id,attempt_id,answers):
+        async with self.session_maker() as session:
+            attempt = await session.get(Attempt,attempt_id) # TODO: Create score calculation when time comes
+            if attempt.user_id != user_id:
+                raise Exception("User does not own this attempt")
+            if attempt.is_completed:
+                raise Exception("Attempt has already been completed")
+            attempt.attempt = answers
+            attempt.is_completed = True
+            await session.commit()
+            return attempt
+
+    async def get_attempts_by_user_id(self,user_id):
+        async with self.session_maker() as session:
+            return (await session.execute(select(Attempt).where(Attempt.user_id == user_id))).scalars().all()
 
 
 async def close(self):

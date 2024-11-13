@@ -18,6 +18,7 @@ class User(Base):
     flashcards = relationship('FlashcardDeck', uselist=True, cascade='all, delete-orphan')
     attempts = relationship('Attempt', uselist=True,
                             cascade='all, delete-orphan')
+    calendar_events = relationship('CalendarEvent', uselist=True, cascade='all, delete-orphan')
 
     def __repr__(self):
         return f"<User(id={self.id}, email='{self.email}', username='{self.username}')>"
