@@ -134,6 +134,7 @@ class DatabaseService:
             await session.commit()
             return event
 
+
     async def update_note_by_id(self, note_id: int, note_update: dict, user_id: int):
         async with self.session_maker() as session:
             note = (await session.get(Note, note_id))
@@ -147,6 +148,7 @@ class DatabaseService:
             await session.commit()
             return note
 
+
     async def update_event_by_id(self, event_id: int, event_update: dict, user_id: int):
         async with self.session_maker() as session:
             event = (await session.get(CalendarEvent, event_id))
@@ -159,6 +161,7 @@ class DatabaseService:
             session.add(event)
             await session.commit()
             return event
+
 
     async def get_flashcard_decks_by_user_id(self, user_id: int):
         async with self.session_maker() as session:
@@ -226,6 +229,7 @@ class DatabaseService:
                 raise Exception("User does not own this event")
             await session.delete(event)
             await session.commit()
+
 
     async def delete_quiz_by_id(self, quiz_id, id):
         async with self.session_maker() as session:
