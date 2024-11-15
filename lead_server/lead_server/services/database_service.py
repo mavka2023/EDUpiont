@@ -1,3 +1,5 @@
+import datetime
+
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession, AsyncEngine
 from sqlalchemy.orm import selectinload, lazyload, joinedload
 from typing import List
@@ -286,6 +288,11 @@ class DatabaseService:
             attempt.attempt = answers
             attempt.is_completed = True
             quiz = (await session.execute(select(Quiz).where(Quiz.id == attempt.quiz_id).options(selectinload(Quiz.questions).selectinload(Question.answers)))).scalars().first()
+            if datetime.timedelta(hours=quiz.time_to_complete.hour,minutes=quiz.time_to_complete.minute,seconds=quiz.time_to_complete.second) < (datetime.datetime.now() - attempt.start_date):
+                attempt.score = 0
+                await session.commit()
+                return attempt
+
             attempt.score = calculate_score(quiz,answers)
             await session.commit()
             return attempt
