@@ -11,10 +11,12 @@ class Question(Base):
     question = Column(String)
     quiz_id = Column(Integer, ForeignKey('quizzes.id'))
     resource_url = Column(String)
+    question_type = Column(String)
     answers = relationship('Answer',
                            primaryjoin='Question.id == Answer.question_id',
                            uselist=True,
                            cascade='all, delete-orphan')
+    score = Column(Integer)
 
     def __repr__(self):
         return f'<Question(id={self.id}, question={self.question})>'
@@ -23,7 +25,7 @@ class Question(Base):
     @classmethod
     def from_dict(cls, data):
         self = cls()
-        for field in ['question', 'quiz_id', 'resource_url']:
+        for field in ['question', 'quiz_id', 'resource_url', 'score', 'question_type']:
             if field in data:
                 setattr(self, field, data[field])
         if 'answers' in data:

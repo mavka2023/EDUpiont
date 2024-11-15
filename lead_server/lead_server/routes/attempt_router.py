@@ -44,7 +44,7 @@ def get_attempt_router(db_service: DatabaseService, jwt_secret: str):
         user = request.state.user
         attempt_id = request.path_params['attempt_id']
         try:
-            attempt = await db_service.submit_attempt(user.id, attempt_id, await request.json()) #TODO: Add score calculation logic when time comes
+            attempt = await db_service.submit_attempt(user.id, attempt_id, await request.json())
             return Response(status_code=200)
         except Exception as e:
             return Response(status_code=400, content="Invalid attempt")

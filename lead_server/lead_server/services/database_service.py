@@ -8,6 +8,33 @@ from lead_server.models.calendar_models.calendar_event import CalendarEvent
 from lead_server.models.flashcard_models.flashcard_deck import FlashcardDeck
 
 
+def calculate_score(quiz, answers):
+    score = 0
+    for question in quiz.questions:
+        if str(question.id) not in answers.keys():
+            continue
+
+        if question.question_type == "multiple_choice":
+            correct = 0
+            for answer in question.answers:
+                if answer.is_correct and str(answer.id) in answers.get(str(question.id),[]):
+                    correct += 1
+                elif not answer.is_correct and str(answer.id) not in answers.get(str(question.id),[]):
+                    correct += 1
+            if correct == len(question.answers):
+                score += question.score
+
+        elif question.question_type == "text":
+            correct = 0
+            for answer in question.answers:
+                if answer.required_answer == answers.get(str(question.id),{}).get(str(answer.id),{}).get("text",""):
+                    correct += 1
+            if correct == len(question.answers):
+                score += question.score
+    return score
+
+
+
 class DatabaseService:
     engine: AsyncEngine = None
     session_maker = None
@@ -24,8 +51,11 @@ class DatabaseService:
     async def add_user(self, user: User) -> None:
         session: AsyncSession = None
         async with self.session_maker() as session:
-            session.add(user)
-            await session.commit()
+            if not (await session.execute(select(User).where(User.email == user.email))).scalars().first():
+                session.add(user)
+                await session.commit()
+            else:
+                raise Exception("User already exists")
 
     async def get_user_by_email(self, user_email: str) -> User:
         session: AsyncSession = None
@@ -248,13 +278,15 @@ class DatabaseService:
 
     async def submit_attempt(self,user_id,attempt_id,answers):
         async with self.session_maker() as session:
-            attempt = await session.get(Attempt,attempt_id) # TODO: Create score calculation when time comes
+            attempt = await session.get(Attempt,attempt_id)
             if attempt.user_id != user_id:
                 raise Exception("User does not own this attempt")
             if attempt.is_completed:
                 raise Exception("Attempt has already been completed")
             attempt.attempt = answers
             attempt.is_completed = True
+            quiz = (await session.execute(select(Quiz).where(Quiz.id == attempt.quiz_id).options(selectinload(Quiz.questions).selectinload(Question.answers)))).scalars().first()
+            attempt.score = calculate_score(quiz,answers)
             await session.commit()
             return attempt
 
