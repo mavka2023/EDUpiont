@@ -1,9 +1,8 @@
 import React from 'react';
-import { ListItem, ListItemText, ListItemButton, Box } from '@mui/material';
-
-import { spacing } from '../../styles/constans';
-import { StyledListItem, StyledListItemButton } from './styles';
+import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { spacing } from '../../styles/constans';
+import { StyledCard, StyledCardContent, StyledListContainer, StyledListItemContainer } from './styles';
 
 export interface ListItemProps {
   title: string;
@@ -13,35 +12,46 @@ export interface ListItemProps {
   icon?: React.ReactNode;
 }
 
-interface ListProps {
-  items: ListItemProps[];
-}
-
-const List: React.FC<ListProps> = ({ items }) => {
-
-  const renderItem = (item: ListItemProps) => <Box width={"100%"} height={"100%"} display="flex" flexDirection={"column"} alignItems={"center"} justifyContent={"center"}>
-      {item.icon ? item.icon : null}
-      <Box justifySelf={"flex-end"} display={"flex"}>
-        <ListItemText primary={item.title} secondary={item.text} />
+const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
+  
+  const renderItem = (item: ListItemProps) => (
+    <StyledListItemContainer>
+      {item.icon && (
+        <Box mb={spacing.sm}>
+          {item.icon}
+        </Box>
+      )}
+      <Box textAlign="center">
+        <Typography variant="h6">
+          {item.title}
+        </Typography>
+        <Typography variant="body2">
+          {item.text}
+        </Typography>
       </Box>
-  </Box>
+    </StyledListItemContainer>
+  );
 
   return (
-    <Box component="ul" display="grid" gridTemplateColumns="1fr 1fr 1fr" gap={spacing.lg}>
+    <StyledListContainer>
       {items.map((item, index) => (
-        <StyledListItem key={index} disablePadding>
-          {item.link ? (
-            <StyledListItemButton component={Link} to={item.link}>
-              {renderItem(item)}
-            </StyledListItemButton>
-          ) : (
-            <StyledListItemButton onClick={item.onClick}>
-              {renderItem(item)}
-            </StyledListItemButton>
-          )}
-        </StyledListItem>
+        <StyledCard key={index}>
+          <StyledCardContent>
+            {item.link ? (
+              <Link to={item.link}>
+                {renderItem(item)}
+              </Link>
+            ) : item.onClick ? (
+              <Box onClick={item.onClick}>
+                {renderItem(item)}
+              </Box>
+            ) : (
+              renderItem(item)
+            )}
+          </StyledCardContent>
+        </StyledCard>
       ))}
-    </Box>
+    </StyledListContainer>
   );
 };
 

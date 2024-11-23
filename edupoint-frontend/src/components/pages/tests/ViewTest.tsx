@@ -4,6 +4,7 @@ import { Box, Button, Typography, Card, CardContent, CardActions, Divider, IconB
 import EditIcon from '@mui/icons-material/Edit';
 import ShareIcon from '@mui/icons-material/Share';
 import MainContent from '../../mainContent/MainContent';
+import { spacing } from '../../../styles/constans';
 
 const ViewTest: React.FC = () => {
     const { testId } = useParams<{ testId: string }>();
@@ -27,25 +28,27 @@ const ViewTest: React.FC = () => {
         <MainContent title={`Tests`}>
             <Card>
                 <CardContent>
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                        <Typography variant="h5" gutterBottom>
-                        Test #{testId}
-                        </Typography>
-                        <Box>
-                            <IconButton color="primary" onClick={handleEdit} aria-label="Edit Test">
-                                <EditIcon />
-                            </IconButton>
-                            <IconButton color="secondary" onClick={handleShare} aria-label="Share Test">
-                                <ShareIcon />
-                            </IconButton>
+                    <Box display="flex" flexDirection={"column"} gap={spacing.sm}>
+                        <Box display="flex" justifyContent="space-between" alignItems="center">
+                            <Typography variant="h5">
+                            Test #{testId}
+                            </Typography>
+                            <Box display={"flex"} gap={spacing.sm}>
+                                <IconButton color="primary" onClick={handleEdit} aria-label="Edit Test">
+                                    <EditIcon />
+                                </IconButton>
+                                <IconButton color="secondary" onClick={handleShare} aria-label="Share Test">
+                                    <ShareIcon />
+                                </IconButton>
+                            </Box>
                         </Box>
+                        <Divider/>
+                        <Typography variant="body1">
+                            This test contains questions to evaluate user knowledge.
+                        </Typography>
                     </Box>
-                    <Divider sx={{ mb: 2 }} />
-                    <Typography variant="body1">
-                        Description: This test contains questions to evaluate user knowledge.
-                    </Typography>
                 </CardContent>
-                <CardActions sx={{ justifyContent: 'space-between', px: 2, pb: 2 }}>
+                <CardActions>
                     <Button variant="contained" color="success" onClick={handleStart}>
                         Start Test
                     </Button>

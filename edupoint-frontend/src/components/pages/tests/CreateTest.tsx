@@ -25,6 +25,7 @@ interface CreateTestProps {
 
 const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
   const [questions, setQuestions] = useState<Question[]>(test?.questions || []);
+  const [questionId, setQuestionId] = useState<number>(questions.length + 1);
   const [testName, setTestName] = useState<string>(test?.name || '');
   const [errors, setErrors] = useState<{ [key: number]: string }>({});
 
@@ -38,8 +39,9 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
   const addQuestion = () => {
     setQuestions((prev) => [
       ...prev,
-      { id: prev.length + 1, type: 'text', question: '', options: [''] },
+      { id: questionId, type: 'text', question: '', options: [''] },
     ]);
+    setQuestionId((prev) => prev + 1);
   };
 
   const updateQuestion = (id: number, field: keyof Question, value: any) => {
@@ -115,7 +117,7 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
 
   return (
     <MainContent title={test ? "Edit Test" : "Create Test"} text="Create or edit your test by adding questions and options">
-      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, mt: 3 }}>
+      <Box display={"flex"} flexDirection={"column"} gap={spacing.lg}>
         <TextField
           label="Test Name"
           variant="outlined"

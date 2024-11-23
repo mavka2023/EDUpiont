@@ -1,5 +1,6 @@
 import React from 'react';
 import { Typography, Box } from '@mui/material';
+import { StyledMainContent } from './styles';
 
 interface MainContentProps {
   title: string;
@@ -9,17 +10,15 @@ interface MainContentProps {
 
 const MainContent: React.FC<MainContentProps> = ({ title, text, children }) => {
   return (
-    <Box p={3} width="100%">
-      <Typography variant="h4" gutterBottom>
+    <StyledMainContent>
+      <Typography variant="h4">
         {title}
       </Typography>
-      <Typography variant="subtitle1" gutterBottom>
+      <Typography variant="subtitle1">
         {text}
       </Typography>
-      <Box mt={2}>
         {children}
-      </Box>
-    </Box>
+    </StyledMainContent>
   );
 };
 

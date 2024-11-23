@@ -1,25 +1,45 @@
-import { ListItem, ListItemButton } from "@mui/material";
+import { Box, Card, CardContent, ListItem, ListItemButton } from "@mui/material";
 import styled from "styled-components";
-import { colors } from "../../styles/constans";
-import { ForwardRefExoticComponent, ReactElement, ReactNode } from "react";
+import { spacing } from "../../styles/constans";
 
 
-export const StyledListItem = styled(ListItem)`
-    border: 1px solid ${colors.black};
-    background: ${colors['gray-lt']};
-    border-radius: 10px;
-    width: 200px;
-    height: 200px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: flex-end;
-`
+export const StyledListContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: ${spacing.lg};
+`;
 
-export const StyledListItemButton = styled(ListItemButton)<{component?: ForwardRefExoticComponent<any>, to?: string, onClick?: () => void}>`
-    width: 100%;
+export const StyledCard = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  border-radius: 2px;
+  box-shadow: 3;
+  transition: 0.15s!important;
+  height: 180px;
+  width: 180px;
 
-    > div {
-        text-align: center;
-    }
-`
+  &:hover {
+    transform: scale(1.05);
+  }
+
+`;
+
+export const StyledCardContent = styled(CardContent)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%!important;
+  padding: 0!important;
+
+  > a, > div {
+    height: 100%;
+  }
+`;
+
+export const StyledListItemContainer = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+`;
