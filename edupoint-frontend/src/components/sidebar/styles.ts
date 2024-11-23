@@ -14,10 +14,6 @@ export const SidebarContainer = styled.div`
   border-right: 1px solid ${colors.gray};
 `;
 
-export const LinksContainer = styled.div`
-  flex: 1;
-`;
-
 export const StyledListItem = styled(ListItem)`
   width: 100%;
   padding: 0!important;
@@ -36,18 +32,6 @@ export const StyledLink = styled(Link)`
   display: block;
   font-size: ${fontSize.md};
   padding: ${spacing.sm} ${spacing.md};
-`;
-
-export const UserContainer = styled.div`
-
-  > div {
-    display: flex;
-    align-items: center;
-  }
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 export const LogoContainer = styled.div`

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Typography } from '@mui/material';
+import MainContent from '../../mainContent/MainContent';
 
 const Dashboard: React.FC = () => {
   return (
-    <div>
-      <Typography variant="h4">Dashboard</Typography>
-      <p>Welcome to the dashboard!</p>
-    </div>
+    <MainContent title="Dashboard" text="Welcome to the dashboard">
+
+    </MainContent>
   );
 };
 

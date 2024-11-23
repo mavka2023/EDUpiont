@@ -5,8 +5,11 @@ import { RootState } from './redux/store';
 import Sidebar from './components/sidebar/Sidebar';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
-import Dashboard from './components/Dashboard';
+import Dashboard from './components/pages/dashboard/Dashboard';
 import styled from 'styled-components';
+import Tests from './components/pages/tests/Tests';
+import Flashcards from './components/pages/flashcards/Flashcards';
+import Notes from './components/pages/notes/Notes';
 
 const AppContainer = styled.div`
   display: flex;
@@ -14,7 +17,6 @@ const AppContainer = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  flex: 1;
   padding: 20px;
 `;
 
@@ -24,7 +26,6 @@ const App: React.FC = () => {
   return (
     <AppContainer>
       {isLoggedIn && <Sidebar />}
-      <ContentContainer>
         <Routes>
           {!isLoggedIn ? (
             <>
@@ -35,13 +36,13 @@ const App: React.FC = () => {
           ) : (
             <>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/quizes" element={<Dashboard />} />
-              <Route path="/tests" element={<Dashboard />} />
+              <Route path="/tests" element={<Tests />} />
+              <Route path="/notes" element={<Notes />} />
+              <Route path="/flashcards" element={<Flashcards />} />
               <Route path="*" element={<Navigate to="/dashboard" />} />
             </>
           )}
         </Routes>
-      </ContentContainer>
     </AppContainer>
   );
 };
