@@ -1,64 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/authSlice';
-import { RootState } from '../redux/store';
+import { logout } from '../../redux/authSlice';
+import { RootState } from '../../redux/store';
 import { Avatar, Button, IconButton, List, ListItem, Menu, MenuItem, Typography } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
-import styled from 'styled-components';
-
-const SidebarContainer = styled.div`
-  width: 250px;
-  background: #f0f0f0;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
-`;
-
-const LinksContainer = styled.div`
-  flex: 1;
-`;
-
-const StyledListItem = styled(ListItem)`
-  width: 100%;
-  padding: 0;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  border-radius: 10px;
-  margin: 10px 0;
-
-  &:hover {
-    background-color: #e0e0e0;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-
-const StyledLink = styled(Link)`
-  width: 100%;
-  text-decoration: none;
-  color: inherit;
-  display: block;
-`;
-
-const UserContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const LogoContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  align-items: center;
-
-  img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
-`;
-
+import { LinksContainer, LogoContainer, SidebarContainer, StyledLink, StyledListItem, UserContainer } from './styles';
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
@@ -100,10 +47,12 @@ const Sidebar: React.FC = () => {
         </LinksContainer>
       </div>
       <UserContainer>
-      <Avatar alt={user?.name} src={user?.profilePicture} />
-      <Typography variant="body1" style={{ marginLeft: '10px' }}>
-        {user?.name}
-      </Typography>
+        <div>
+        <Avatar alt={user?.name} src={user?.profilePicture} />
+        <Typography variant="body1" style={{ marginLeft: '10px' }}>
+          {user?.name} {user?.surname}
+        </Typography>
+        </div>
       <IconButton onClick={handleMenuOpen}>
         <SettingsIcon />
       </IconButton>

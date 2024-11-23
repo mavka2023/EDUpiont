@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from './redux/store';
-import Sidebar from './components/Sidebar';
+import Sidebar from './components/sidebar/Sidebar';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 import Dashboard from './components/Dashboard';
