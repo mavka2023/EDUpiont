@@ -12,6 +12,8 @@ import Flashcards from './components/pages/flashcards/Flashcards';
 import Notes from './components/pages/notes/Notes';
 import SolveTest from './components/pages/tests/SolveTest';
 import ViewTest from './components/pages/tests/ViewTest';
+import CreateTest from './components/pages/tests/CreateTest';
+import EditTest from './components/pages/tests/EditTest';
 
 const AppContainer = styled.div`
   display: flex;
@@ -39,6 +41,8 @@ const App: React.FC = () => {
             <>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/tests/*" element={<Tests />} />
+              <Route path="/tests/create" element={<CreateTest onSave={() => console.log("Saved test!")}/>} />
+              <Route path="/tests/edit/:testId" element={<EditTest></EditTest>} />
               <Route path="/tests/:testId" element={<ViewTest />} />
               <Route path="/tests/solve/:testId" element={<SolveTest />} />
               <Route path="/notes" element={<Notes />} />
