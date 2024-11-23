@@ -10,6 +10,8 @@ import styled from 'styled-components';
 import Tests from './components/pages/tests/Tests';
 import Flashcards from './components/pages/flashcards/Flashcards';
 import Notes from './components/pages/notes/Notes';
+import SolveTest from './components/pages/tests/SolveTest';
+import ViewTest from './components/pages/tests/ViewTest';
 
 const AppContainer = styled.div`
   display: flex;
@@ -36,10 +38,12 @@ const App: React.FC = () => {
           ) : (
             <>
               <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/tests" element={<Tests />} />
+              <Route path="/tests/*" element={<Tests />} />
+              <Route path="/tests/:testId" element={<ViewTest />} />
+              <Route path="/tests/solve/:testId" element={<SolveTest />} />
               <Route path="/notes" element={<Notes />} />
               <Route path="/flashcards" element={<Flashcards />} />
-              <Route path="*" element={<Navigate to="/dashboard" />} />
+              {/* <Route path="*" element={<Navigate to="/dashboard" />} /> */}
             </>
           )}
         </Routes>

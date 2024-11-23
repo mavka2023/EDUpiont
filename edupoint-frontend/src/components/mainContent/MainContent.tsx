@@ -3,7 +3,7 @@ import { Typography, Box } from '@mui/material';
 
 interface MainContentProps {
   title: string;
-  text: string;
+  text?: string;
   children?: React.ReactNode;
 }
 

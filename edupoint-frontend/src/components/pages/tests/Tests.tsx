@@ -8,25 +8,23 @@ const Tests = () => {
     {
       title: 'Test 1',
       text: 'Test 1 description',
-      link: '/test1',
+      link: '/tests/1',
     },
     {
       title: 'Test 2',
       text: 'Test 2 description',
-      link: '/test2',
+      link: '/tests/2',
     },
     {
       title: 'Test 3',
       text: 'Test 3 description',
-      link: '/test3',
+      link: '/tests/3',
     },    
     {
       title: 'Add new tests',
       text: 'Test 3 description',
       icon: <AddIcon style={{ fontSize: 48 }} />,
-      onClick: () => {
-        console.log('Add new test');
-      },
+      link: '/tests/create',
     },
   ]
 
