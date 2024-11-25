@@ -11,7 +11,8 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     email = Column(String, nullable=False)
     password_hash = Column(String, nullable=False)
-    username = Column(String, nullable=False)
+    username = Column(String, nullable=False),
+    profile_picture = Column(String, nullable=True)
     cre_date = Column(DateTime, nullable=False, server_default=text('NOW()'))
     quizzes = relationship('Quiz',uselist=True)
     notes = relationship('Note', uselist=True, cascade='all, delete-orphan')
