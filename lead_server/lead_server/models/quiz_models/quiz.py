@@ -10,6 +10,7 @@ class Quiz(Base):
     __tablename__ = "quizzes"
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)
+    description = Column(String, nullable=True)
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     questions = relationship("Question", uselist=True,
                              cascade="all, delete-orphan")
@@ -23,7 +24,7 @@ class Quiz(Base):
     @classmethod
     def from_dict(cls, data):
         self = cls()
-        for field in ['title', 'owner_id', 'valid_until', 'time_to_complete']:
+        for field in ['title', 'owner_id', 'valid_until', 'time_to_complete', 'description']:
             if field in data:
                 setattr(self, field, data[field])
         if 'questions' in data:

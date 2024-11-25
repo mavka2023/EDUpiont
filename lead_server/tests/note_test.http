@@ -1,0 +1,40 @@
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@edupoint.pl",
+  "password": "admin"
+}
+
+
+###
+
+GET http://localhost:8080/api/notes
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMTUxNDgwNC4yMTYxfQ.wTzxP4zssfSh6HHiuxCOTbFo7Gy-cgNqG9cp90d84no
+###
+
+POST http://localhost:8080/api/notes
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMTUxNDgwNC4yMTYxfQ.wTzxP4zssfSh6HHiuxCOTbFo7Gy-cgNqG9cp90d84no
+
+{
+  "title": "Note test",
+  "text": "Content of note 1"
+}
+
+###
+
+PUT http://localhost:8080/api/notes/4
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMTUxNDgwNC4yMTYxfQ.wTzxP4zssfSh6HHiuxCOTbFo7Gy-cgNqG9cp90d84no
+
+{
+  "title": "Note 2",
+  "text": "Content of note 2"
+}
+
+###
+DELETE http://localhost:8080/api/notes/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMTUxNDgwNC4yMTYxfQ.wTzxP4zssfSh6HHiuxCOTbFo7Gy-cgNqG9cp90d84no

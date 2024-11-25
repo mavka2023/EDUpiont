@@ -9,14 +9,15 @@ class FlashcardDeck(Base):
     __tablename__ = 'flashcard_decks'
 
     id = Column(Integer, primary_key=True)
-    title = Column(String(255))
+    title = Column(String, nullable=False)
+    description = Column(String, nullable=True)
     owner_id = Column(Integer, ForeignKey('users.id'))
     flashcards = relationship('Flashcard')
 
     @classmethod
     def from_dict(cls, data):
         self = cls()
-        for field in ['title', 'owner_id']:
+        for field in ['title', 'owner_id', 'description']:
             if field in data:
                 setattr(self, field, data[field])
         if 'flashcards' in data:
