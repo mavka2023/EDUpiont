@@ -1,0 +1,46 @@
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "email": "admin@edupoint.pl",
+  "password": "admin"
+}
+
+
+###
+
+GET http://localhost:8080/api/calendar/events
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMjU1NTY5MC43NzM2MTN9.pe1978AiE41CqmXMrFpJA6ot0hfo_b7bg4Bj7aeeJz8
+
+
+###
+
+POST http://localhost:8080/api/calendar/events
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMjU1NTY5MC43NzM2MTN9.pe1978AiE41CqmXMrFpJA6ot0hfo_b7bg4Bj7aeeJz8
+
+
+{
+  "text": "Do Quiz 1",
+  "description": "Do Quiz 1 for week 1",
+  "remind_datetime": "2021-12-31T23:59:59"
+}
+
+###
+
+PUT http://localhost:8080/api/calendar/events/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMjU1NTY5MC43NzM2MTN9.pe1978AiE41CqmXMrFpJA6ot0hfo_b7bg4Bj7aeeJz8
+
+
+{
+  "text": "Do week 1 Quiz",
+  "remind_datetime": "2025-12-31T23:59:59"
+}
+
+###
+DELETE http://localhost:8080/api/calendar/events/1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJ1c2VyX2VtYWlsIjoiYWRtaW5AZWR1cG9pbnQucGwiLCJ1c2VybmFtZSI6ImFkbWluIiwiY3JlX3RpbWVzdGFtcCI6MTczMjU1NTY5MC43NzM2MTN9.pe1978AiE41CqmXMrFpJA6ot0hfo_b7bg4Bj7aeeJz8
+

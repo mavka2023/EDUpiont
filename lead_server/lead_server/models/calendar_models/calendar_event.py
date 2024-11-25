@@ -10,13 +10,14 @@ class CalendarEvent(Base):
 
     id = Column(Integer, primary_key=True)
     text = Column(String, nullable=False)  # Event header text
+    description = Column(String)
     remind_datetime = Column(DateTime, nullable=False)
     owner_id = Column(Integer, ForeignKey('users.id'))
 
     @classmethod
     def from_dict(cls, data):
         self = cls()
-        for field in ['text', 'remind_datetime', 'owner_id']:
+        for field in ['text', 'remind_datetime', 'owner_id','description']:
             if field in data:
                 if field == 'remind_datetime':
                     setattr(self, field, datetime.fromisoformat(data[field]))
