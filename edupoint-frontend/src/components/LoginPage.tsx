@@ -86,7 +86,7 @@ const LoginPage: React.FC = () => {
             <FormContainer>
 
                 <LogoContainer>
-                    <img src="/icons/logo.png" alt="EduPoint Logo"/>
+                    <img src="logo.png" alt="EduPoint Logo"/>
                     <h1>EduPoint</h1>
                 </LogoContainer>
 
