@@ -13,6 +13,9 @@ import Notes from './components/pages/notes/Notes';
 import SolveTest from './components/pages/tests/SolveTest';
 import CreateTest from './components/pages/tests/CreateTest';
 import EditTest from './components/pages/tests/EditTest';
+import ViewNote from './components/pages/notes/ViewNote';
+import EditNote from './components/pages/notes/EditNote';
+import CreateNote from './components/pages/notes/CreateNote';
 import MainPage from './components/MainPage';
 import HomePage from './components/HomePage';
 
@@ -47,6 +50,9 @@ const App: React.FC = () => {
                     <Route path="/" element={<DashboardLayout />}>
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="notes" element={<Notes />} />
+                        <Route path="notes/create" element={<CreateNote/>} />
+                        <Route path="notes/edit/:testId" element={<EditNote />} />
+                        <Route path="notes/:testId" element={<ViewNote />} />
                         <Route path="tests" element={<Tests />} />
                         <Route path="flashcards" element={<Flashcards />} />
                         <Route path="tests/create" element={<CreateTest/>} />
