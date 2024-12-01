@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, ListItem, ListItemButton } from "@mui/material";
+import { Box, Card, CardContent, IconButton, ListItem, ListItemButton } from "@mui/material";
 import styled from "styled-components";
 import { spacing } from "../../styles/constans";
 
@@ -30,16 +30,25 @@ export const StyledCardContent = styled(CardContent)`
   justify-content: center;
   height: 100%!important;
   padding: 0!important;
-
-  > a, > div {
-    height: 100%;
-  }
 `;
 
 export const StyledListItemContainer = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100%;
+  cursor: pointer;
+  position: relative;
+
+  > a, > div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+`;
+
+export const StyledMenuIconButton = styled(IconButton)`
+  position: absolute  !important;
+  top: 0;
+  right: 0;
 `;

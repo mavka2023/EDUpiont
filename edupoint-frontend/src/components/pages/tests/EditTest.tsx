@@ -1,6 +1,6 @@
 import React from 'react';
-import CreateTest from './CreateTest';
 import { Test } from './CreateTest';
+import TestForm from './TestForm';
 
 const existingTest = {
   id: 1,
@@ -16,7 +16,7 @@ const EditTest: React.FC = () => {
     console.log('Test saved:', test);
   };
 
-  return <CreateTest test={existingTest} onSave={handleSave} />;
+  return <TestForm test={existingTest} onSave={handleSave} />;
 };
 
 export default EditTest;

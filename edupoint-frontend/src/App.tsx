@@ -11,12 +11,10 @@ import Tests from './components/pages/tests/Tests';
 import Flashcards from './components/pages/flashcards/Flashcards';
 import Notes from './components/pages/notes/Notes';
 import SolveTest from './components/pages/tests/SolveTest';
-import ViewTest from './components/pages/tests/ViewTest';
 import CreateTest from './components/pages/tests/CreateTest';
 import EditTest from './components/pages/tests/EditTest';
 import MainPage from './components/MainPage';
 import HomePage from './components/HomePage';
-
 
 const AppContainer = styled.div`
     display: flex;
@@ -27,9 +25,7 @@ const AppContainer = styled.div`
 const DashboardLayout: React.FC = () => (
     <AppContainer>
         <Sidebar />
-
-            <Outlet />
-
+        <Outlet />
     </AppContainer>
 );
 
@@ -48,17 +44,14 @@ const App: React.FC = () => {
                 <>
 
                     <Route path="/" element={<HomePage />} />
-
-
                     <Route path="/" element={<DashboardLayout />}>
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="notes" element={<Notes />} />
                         <Route path="tests" element={<Tests />} />
                         <Route path="flashcards" element={<Flashcards />} />
-                        <Route path="tests/create" element={<CreateTest onSave={() => console.log('Saved test!')} />} />
+                        <Route path="tests/create" element={<CreateTest/>} />
                         <Route path="tests/edit/:testId" element={<EditTest />} />
-                        <Route path="tests/:testId" element={<ViewTest />} />
-                        <Route path="tests/solve/:testId" element={<SolveTest />} />
+                        <Route path="tests/:testId" element={<SolveTest />} />
                     </Route>
 
                     <Route path="*" element={<Navigate to="/dashboard" />} />

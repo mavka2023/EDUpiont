@@ -4,7 +4,7 @@ import { colors, spacing, fontSize } from "../../styles/constans";
 import { Link } from "react-router-dom";
 
 export const SidebarContainer = styled.div`
-  width: 250px;
+  width: 350px;
   background: ${colors.white}; 
   padding: ${spacing.lg};     
   display: flex;

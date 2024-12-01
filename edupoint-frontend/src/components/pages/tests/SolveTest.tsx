@@ -31,7 +31,7 @@ const SolveTest: React.FC = () => {
                 {questions.map((question) => (
                     <Card key={question.id}>
                         <CardContent>
-                            <Typography variant="h6" gutterBottom>
+                            <Typography variant="h4" gutterBottom>
                                 {question.question}
                             </Typography>
                             <FormControl component="fieldset" fullWidth>
