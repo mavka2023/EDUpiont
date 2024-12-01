@@ -53,7 +53,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={() => { handleMenuClose(); navigator.clipboard.writeText(link); }}>Copy link</MenuItem>
-      <MenuItem onClick={() => { handleMenuClose(); window.location.href = `${window.location.href}/edit/${index}`; }}>Edit</MenuItem>
+      <MenuItem onClick={() => { handleMenuClose(); navigate(`edit/${index}`); }}>Edit</MenuItem>
     </Menu>
   );
 
