@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, IconButton, Menu, MenuItem } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
-import { spacing } from '../../styles/constans';
+import { spacing } from '../../styles/constants';
 import { StyledCard, StyledCardContent, StyledListContainer, StyledListItemContainer, StyledMenuIconButton } from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ export interface ListItemProps {
   link: string;
   icon?: React.ReactNode;
   hideMenu?: boolean;
-  hideModal?: boolean;
+  showConfirmationModal?: boolean;
 }
 
 const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
@@ -65,7 +65,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
         </Box>
       )}
       <Box textAlign="center">
-        <Typography variant="h6">
+        <Typography variant="h4">
           {item.title}
         </Typography>
       </Box>
@@ -74,7 +74,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
 
   const handleBoxClick = (item: ListItemProps) => (e: React.MouseEvent<HTMLDivElement>) => {
 
-    if (item.hideModal) {
+    if (!item.showConfirmationModal) {
       navigate(item.link);
     }
 
@@ -115,7 +115,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
         <DialogTitle>Confirm Navigation</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Are you sure you want to navigate to this link?
+            Are you sure you want to start the test?
           </DialogContentText>
         </DialogContent>
         <DialogActions>

@@ -1,15 +1,15 @@
 import { createTheme } from '@mui/material/styles';
-import { colors, spacing, fontSize, boxShadow, borderRadius } from './constans';
+import { colors, spacing, fontSize, boxShadow, borderRadius } from './constants';
 
 const theme = createTheme({
   typography: {
     fontFamily: "'Roboto', sans-serif",
-    h1: { fontWeight: 700, fontSize: fontSize.xxl, lineHeight: 1.2 },
-    h2: { fontWeight: 700, fontSize: fontSize.xl, lineHeight: 1.3 },
+    h1: { fontWeight: 400, fontSize: fontSize.xxl, lineHeight: 1.2 },
+    h2: { fontWeight: 400, fontSize: fontSize.xl, lineHeight: 1.3 },
     h3: { fontWeight: 600, fontSize: fontSize.lg, lineHeight: 1.4 },
-    h4: { fontWeight: 600, fontSize: fontSize.sm, lineHeight: 1.5 },
+    h4: { fontWeight: 500, fontSize: fontSize.md, lineHeight: 1.5 },
     h5: { fontWeight: 500, fontSize: fontSize.sm, lineHeight: 1.6 },
-    h6: { fontWeight: 500, fontSize: fontSize.xs, lineHeight: 1.7 },
+    h6: { fontWeight: 300, fontSize: fontSize.xs, lineHeight: 1.7 },
     body1: { fontSize: fontSize.md, lineHeight: 1.5 },
     body2: { fontSize: fontSize.sm, lineHeight: 1.5 },
   },
@@ -49,6 +49,16 @@ const theme = createTheme({
         },
       },
     },
+    MuiCardContent: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+          '&:last-child': {
+            paddingBottom: 0,
+          },
+        },
+      },
+    },
     MuiLink: {
       styleOverrides: {
         root: {
@@ -64,6 +74,7 @@ const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
+          marginTop: spacing.xs,
           width: '100%',
         },
       },
@@ -71,6 +82,7 @@ const theme = createTheme({
     MuiSelect: {
       styleOverrides: {
         root: {
+          marginTop: spacing.xs,
           width: '100%',
         },
       },
@@ -81,7 +93,43 @@ const theme = createTheme({
           width: '100%',
         },
       },
-    }
+    },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: borderRadius.lg,
+          boxShadow: boxShadow.lg,
+          padding: spacing.md,
+          backgroundColor: colors.white,
+          width: '90%', 
+          maxWidth: '600px', 
+        },
+        paperFullWidth: {
+          width: '100%',
+        },
+        paperFullScreen: {
+          width: '100%',
+          height: '100%',
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+      root: {
+        fontSize: fontSize.lg,
+        fontWeight: 500,
+        margin: ` 0 0 ${spacing.md}`,
+        borderBottom: `1px solid ${colors['gray']}`,
+      },
+      },
+    },
+    MuiDialogContentText: {
+      styleOverrides: {
+      root: {
+        fontSize: fontSize.md,
+      },
+      },
+    },
   },
 });
 

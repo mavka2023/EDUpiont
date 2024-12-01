@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { colors, spacing } from '../../styles/constans';
+import { colors, spacing } from '../../styles/constants';
 
 export const StyledMainContent = styled.main`
     display: flex;

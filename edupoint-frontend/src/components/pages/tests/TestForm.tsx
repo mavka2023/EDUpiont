@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography, Card, CardContent, IconButton, Sele
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MainContent from '../../mainContent/MainContent';
-import { spacing } from '../../../styles/constans';
+import { spacing } from '../../../styles/constants';
 
 interface Question {
   id: number;
@@ -135,7 +135,7 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
         {questions.map((question) => (
           <Card key={question.id}>
             <CardContent>
-              <Box display="flex" flexDirection="column" alignItems="flex-start"  gap={spacing.md}>
+              <Box display="flex" flexDirection="column" alignItems="flex-start"  gap={spacing.sm}>
                 <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
                   <Typography variant="h4">Question {question.id}</Typography>
                   <IconButton color="error" onClick={() => deleteQuestion(question.id)}>

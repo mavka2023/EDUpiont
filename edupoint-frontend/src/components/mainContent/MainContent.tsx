@@ -11,7 +11,7 @@ interface MainContentProps {
 const MainContent: React.FC<MainContentProps> = ({ title, text, children }) => {
   return (
     <StyledMainContent>
-      <Typography variant="h4">
+      <Typography variant="h2">
         {title}
       </Typography>
       <Typography variant="subtitle1">

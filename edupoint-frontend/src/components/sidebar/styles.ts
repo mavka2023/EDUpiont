@@ -1,6 +1,6 @@
 import {ListItem } from "@mui/material";
 import styled from "styled-components";
-import { colors, spacing, fontSize } from "../../styles/constans";
+import { colors, spacing, fontSize } from "../../styles/constants";
 import { Link } from "react-router-dom";
 
 export const SidebarContainer = styled.div`

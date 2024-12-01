@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, IconButton, ListItem, ListItemButton } from "@mui/material";
 import styled from "styled-components";
-import { spacing } from "../../styles/constans";
+import { spacing } from "../../styles/constants";
 
 
 export const StyledListContainer = styled.ul`
@@ -12,8 +12,6 @@ export const StyledListContainer = styled.ul`
 export const StyledCard = styled(Card)`
   display: flex;
   flex-direction: column;
-  border-radius: 2px;
-  box-shadow: 3;
   transition: 0.15s!important;
   height: 180px;
   width: 180px;

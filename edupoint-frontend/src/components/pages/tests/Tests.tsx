@@ -8,21 +8,24 @@ const Tests = () => {
     {
       title: 'Test 1',
       link: '/tests/1',
+      showConfirmationModal: true,
     },
     {
       title: 'Test 2',
       link: '/tests/2',
+      showConfirmationModal: true,
     },
     {
       title: 'Test 3',
       link: '/tests/3',
+      showConfirmationModal: true,
     },    
     {
       title: 'Add new tests',
       icon: <AddIcon style={{ fontSize: 48 }} />,
       link: '/tests/create',
       hideMenu: true,
-      hideModal: true,
+
     },
   ]
 

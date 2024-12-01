@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography, Card, CardContent, IconButton, Sele
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MainContent from '../../mainContent/MainContent';
-import { spacing } from '../../../styles/constans';
+import { spacing } from '../../../styles/constants';
 import TestForm from './TestForm';
 
 interface Question {

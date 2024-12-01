@@ -28,7 +28,7 @@ const Sidebar: React.FC = () => {
       <Box>
         <LogoContainer>
           <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="EduPoint logo" />
-          <Typography variant="h4">EduPoint</Typography>
+          <Typography variant="h1">EduPoint</Typography>
         </LogoContainer>
           <List>
             <StyledListItem>
