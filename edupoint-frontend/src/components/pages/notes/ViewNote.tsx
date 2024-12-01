@@ -3,6 +3,7 @@ import { Box, Card, CardContent } from '@mui/material';
 import MainContent from '../../mainContent/MainContent';
 import ReactMarkdown from 'react-markdown';
 import { colors, spacing, fontSize } from '../../../styles/constants';
+import { useParams } from 'react-router-dom';
 
 const mockNoteContent = `
 # Mocked Note
@@ -21,8 +22,10 @@ Markdown makes notes look structured and easy to read.
 `;
 
 const ViewNote: React.FC = () => {
+    const { noteId } = useParams<{ noteId: string }>();
+
     return (
-        <MainContent title="View Note">
+        <MainContent title={`View Note #${noteId}`}>
             <Box display="flex" flexDirection="column" alignItems="flex-start">
                 <Card>
                     <CardContent>

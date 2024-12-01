@@ -18,6 +18,9 @@ import EditNote from './components/pages/notes/EditNote';
 import CreateNote from './components/pages/notes/CreateNote';
 import MainPage from './components/MainPage';
 import HomePage from './components/HomePage';
+import ViewFlashcardSet from './components/pages/flashcards/ViewFlashcardSet';
+import EditFlashcards from './components/pages/flashcards/EditFlashcards';
+import CreateFlashcards from './components/pages/flashcards/CreateFlashcards';
 
 const AppContainer = styled.div`
     display: flex;
@@ -51,13 +54,16 @@ const App: React.FC = () => {
                         <Route path="dashboard" element={<Dashboard />} />
                         <Route path="notes" element={<Notes />} />
                         <Route path="notes/create" element={<CreateNote/>} />
-                        <Route path="notes/edit/:testId" element={<EditNote />} />
-                        <Route path="notes/:testId" element={<ViewNote />} />
+                        <Route path="notes/edit/:noteId" element={<EditNote />} />
+                        <Route path="notes/:noteId" element={<ViewNote />} />
                         <Route path="tests" element={<Tests />} />
-                        <Route path="flashcards" element={<Flashcards />} />
                         <Route path="tests/create" element={<CreateTest/>} />
                         <Route path="tests/edit/:testId" element={<EditTest />} />
                         <Route path="tests/:testId" element={<SolveTest />} />
+                        <Route path="flashcards" element={<Flashcards />} />
+                        <Route path="flashcards/create" element={<CreateFlashcards/>} />
+                        <Route path="flashcards/edit/:flashcardsId" element={<EditFlashcards />} />
+                        <Route path="flashcards/:flashcardsId" element={<ViewFlashcardSet />} />
                     </Route>
 
                     <Route path="*" element={<Navigate to="/dashboard" />} />

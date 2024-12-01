@@ -42,7 +42,6 @@ const LogoContainer = styled(Link)`
 const LogoImage = styled.img`
     width: 40px;
     height: 40px;
-    border-radius: 50%;
 
     &:hover {
             animation: ${logoShake} 0.7s infinite ease-in-out;
