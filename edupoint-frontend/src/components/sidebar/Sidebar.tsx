@@ -5,6 +5,7 @@ import { RootState } from '../../redux/store';
 import { Avatar, IconButton, List, Menu, MenuItem, Typography, Box } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { LogoContainer, SidebarContainer, StyledLink, StyledListItem } from './styles';
+import AnimatedLogo from './Logo';
 
 const Sidebar: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,11 +26,8 @@ const Sidebar: React.FC = () => {
 
   return (
     <SidebarContainer>
-      <Box>
-        <LogoContainer>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="EduPoint logo" />
-          <Typography variant="h1">EduPoint</Typography>
-        </LogoContainer>
+      <Box display="flex" flexDirection="column" alignItems="flex-start">
+          <AnimatedLogo />
           <List>
             <StyledListItem>
               <StyledLink to="/tests">📝 Tests</StyledLink>
