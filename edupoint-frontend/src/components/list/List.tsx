@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, IconButton, Menu, MenuItem } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
-import { spacing } from '../../styles/constants';
+import { colors, spacing } from '../../styles/constants';
 import { StyledCard, StyledCardContent, StyledListContainer, StyledListItemContainer, StyledMenuIconButton } from './styles';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom';
@@ -58,9 +58,9 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
   );
 
   const renderItem = (item: ListItemProps, index: number) => (
-    <div>
+    <>
       {item.icon && (
-        <Box mb={spacing.sm} display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" alignItems="center" height="100%">
           {item.icon}
         </Box>
       )}
@@ -69,7 +69,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
           {item.title}
         </Typography>
       </Box>
-    </div>
+    </>
   );
 
   const handleBoxClick = (item: ListItemProps) => (e: React.MouseEvent<HTMLDivElement>) => {
@@ -113,11 +113,6 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
         onClose={handleModalClose}
       >
         <DialogTitle>Confirm Navigation</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Are you sure you want to start the test?
-          </DialogContentText>
-        </DialogContent>
         <DialogActions>
           <Button onClick={handleModalClose} color="primary">
             Cancel

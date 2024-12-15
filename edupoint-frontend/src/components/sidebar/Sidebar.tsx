@@ -4,7 +4,7 @@ import { logout } from '../../redux/authSlice';
 import { RootState } from '../../redux/store';
 import { Avatar, IconButton, List, Menu, MenuItem, Typography, Box } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { LogoContainer, SidebarContainer, StyledLink, StyledListItem } from './styles';
+import { LogoContainer, SidebarContainer, StyledLink, StyledListItem, StyledNavigationContainer, StyledUserContainer } from './styles';
 import AnimatedLogo from './Logo';
 
 const Sidebar: React.FC = () => {
@@ -26,22 +26,22 @@ const Sidebar: React.FC = () => {
 
   return (
     <SidebarContainer>
-      <Box display="flex" flexDirection="column" alignItems="flex-start">
+      <StyledNavigationContainer>
           <AnimatedLogo />
           <List>
             <StyledListItem>
-              <StyledLink to="/tests">📝 Tests</StyledLink>
+              <StyledLink to="/tests"><span>📝</span>Tests</StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/notes">🗒️ Notes</StyledLink>
+              <StyledLink to="/notes"><span>🗒️</span>Notes</StyledLink>
             </StyledListItem>
             <StyledListItem>
-              <StyledLink to="/flashcards">📇 Flashcards</StyledLink>
+              <StyledLink to="/flashcards"><span>📇</span>Flashcards</StyledLink>
             </StyledListItem>
           </List>
-      </Box>
-      <Box display="flex" justifyContent={"space-between"} alignItems="center">
-        <Box display="flex" alignItems="center">
+      </StyledNavigationContainer>
+      <StyledUserContainer>
+        <Box display="flex" alignItems="center" >
           <Avatar alt={user?.name} src={user?.profilePicture} />
           <Typography variant="body1" sx={{ marginLeft: '10px' }}>
             {user?.name} {user?.surname}
@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
         <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
-      </Box>
+      </StyledUserContainer>
     </SidebarContainer>
   );
 };

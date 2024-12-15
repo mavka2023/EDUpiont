@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Box, Card, CardContent, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import { TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Box, Card, CardContent, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, CardHeader } from '@mui/material';
 import MainContent from '../../mainContent/MainContent';
 import { spacing } from '../../../styles/constants';
 
@@ -49,8 +49,8 @@ const SolveTest: React.FC = () => {
             <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"} gap={spacing.lg}>
                 {questions.map((question) => (
                     <Card key={question.id}>
+                        <CardHeader title={`Question ${question.question}`} />
                         <CardContent>
-                            <Typography variant="h4">{question.question}</Typography>
                             {question.type === 'text' ? (
                                 <TextField
                                     fullWidth

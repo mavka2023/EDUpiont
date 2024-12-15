@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, Card, CardContent, IconButton } from '@mui/material';
+import { Box, Button, TextField, Typography, Card, CardContent, IconButton, CardHeader } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MainContent from '../../mainContent/MainContent';
@@ -92,14 +92,15 @@ const FlashcardsForm: React.FC<FlashcardsFormProps> = ({ flashcardSet, onSave })
 
         {flashcards.map((flashcard) => (
           <Card key={flashcard.id}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" position="relative">
+              <CardHeader title={`Flashcard ${flashcard.id}`}/>   
+              <IconButton color="error" onClick={() => deleteFlashcard(flashcard.id)} style={{position: 'absolute', right: spacing.sm}}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="flex-start" gap={spacing.sm}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-                  <Typography variant="h4">Flashcard {flashcard.id}</Typography>
-                  <IconButton color="error" onClick={() => deleteFlashcard(flashcard.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
+
                 <TextField
                   label="Question"
                   variant="outlined"

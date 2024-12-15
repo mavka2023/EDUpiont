@@ -1,39 +1,51 @@
 import { createTheme } from '@mui/material/styles';
 import { colors, spacing, fontSize, boxShadow, borderRadius } from './constants';
 
+const buttonStyles = {
+  textTransform: 'none',
+  borderRadius: borderRadius.round,
+  fontWeight: 600,
+  fontSize: fontSize.md,
+  padding: `${spacing.sm} ${spacing.xxl}`,
+  background: colors.primary,
+  color: colors.white,
+  letterSpacing: '1px',
+  '&:hover': {
+    backgroundColor: colors['primary-lt'],
+  },
+}
+
 const theme = createTheme({
   typography: {
     fontFamily: "'Roboto', sans-serif",
-    h1: { fontWeight: 400, fontSize: fontSize.xxl, lineHeight: 1.2 },
-    h2: { fontWeight: 400, fontSize: fontSize.xl, lineHeight: 1.3 },
-    h3: { fontWeight: 600, fontSize: fontSize.lg, lineHeight: 1.4 },
-    h4: { fontWeight: 500, fontSize: fontSize.md, lineHeight: 1.5 },
-    h5: { fontWeight: 500, fontSize: fontSize.sm, lineHeight: 1.6 },
-    h6: { fontWeight: 300, fontSize: fontSize.xs, lineHeight: 1.7 },
-    body1: { fontSize: fontSize.md, lineHeight: 1.5 },
-    body2: { fontSize: fontSize.sm, lineHeight: 1.5 },
+    h1: { fontWeight: 300, fontSize: fontSize.xl, lineHeight: 1.2, color: colors['font-header'], fontFamily: "Jaro", letterSpacing: '3px' },
+    h2: { fontWeight: 400, fontSize: fontSize.xxl, lineHeight: 1.3, color: colors['font-header']  },
+    h3: { fontWeight: 600, fontSize: fontSize.lg, lineHeight: 1.4, color: colors['font-header']  },
+    h4: { fontWeight: 600, fontSize: fontSize.md, lineHeight: 1.5, color: colors['font-header']  },
+    h5: { fontWeight: 500, fontSize: fontSize.lg, lineHeight: 1.6, color: colors['font-header']  },
+    h6: { fontWeight: 300, fontSize: fontSize.xs, lineHeight: 1.7, color: colors['font-header']  },
+    body1: { fontSize: fontSize.md, lineHeight: 1.5, color: colors['font-body']  },
+    body2: { fontSize: fontSize.sm, lineHeight: 1.5, color: colors['font-body']  },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          textTransform: 'none',
-          borderRadius: borderRadius.md,
-          fontWeight: 600,
-          padding: `${spacing.sm} ${spacing.md}`,
+          ...buttonStyles as any
         },
         contained: {
           backgroundColor: colors.primary,
           color: colors.white,
           '&:hover': {
-            backgroundColor: colors.text,
+            backgroundColor: colors['primary-lt'],
           },
         },
         outlined: {
           borderColor: colors.primary,
+          background: 'none',
           color: colors.primary,
           '&:hover': {
-            backgroundColor: `${colors.primary}33`,
+            backgroundColor: `${colors.primary}`,
           },
         },
       },
@@ -43,19 +55,32 @@ const theme = createTheme({
         root: {
           borderRadius: borderRadius.lg,
           boxShadow: boxShadow.md,
-          padding: spacing.md,
           width: '100%',
           backgroundColor: colors.white,
+          border: `2px solid ${colors['gray-dk']}`,
+        'border-radius': borderRadius.xl,
+          padding: 0,
         },
       },
     },
     MuiCardContent: {
       styleOverrides: {
         root: {
-          padding: 0,
-          '&:last-child': {
-            paddingBottom: 0,
-          },
+          padding: spacing.md,
+        },
+      },
+    },
+    MuiCardHeader: {
+      styleOverrides: {
+        root: {
+          padding: `${spacing.sm} ${spacing.md}`,
+          backgroundColor: colors['gray'],
+          width: '100%',
+          'border-bottom': `2px solid ${colors['gray-dk']}`,
+          'span': {
+            fontSize: fontSize.md,
+            fontWeight: 600,
+          }
         },
       },
     },
@@ -99,10 +124,10 @@ const theme = createTheme({
         paper: {
           borderRadius: borderRadius.lg,
           boxShadow: boxShadow.lg,
-          padding: spacing.md,
+          padding: spacing.sm,
           backgroundColor: colors.white,
           width: '90%', 
-          maxWidth: '600px', 
+          maxWidth: '1000px', 
         },
         paperFullWidth: {
           width: '100%',
@@ -116,20 +141,44 @@ const theme = createTheme({
     MuiDialogTitle: {
       styleOverrides: {
       root: {
-        fontSize: fontSize.lg,
+        fontSize: fontSize.xxl,
         fontWeight: 500,
-        margin: ` 0 0 ${spacing.md}`,
-        borderBottom: `1px solid ${colors['gray']}`,
+        // borderBottom: `1px solid ${colors['gray']}`,
+        textAlign: 'center',
+        paddingBottom: 0,
       },
+      },
+    },
+    MuiDialogContent: {
+      styleOverrides: {
+        root: {
+          padding: 0,
+        },
       },
     },
     MuiDialogContentText: {
       styleOverrides: {
       root: {
+        padddingTop: spacing.sm,
+        paddingBottom: 0,
         fontSize: fontSize.md,
+        color: colors['font-body'],
+        textAlign: 'center',
       },
       },
     },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          padding: spacing.md,
+          justifyContent: 'center',
+          '> button': {
+            margin: spacing.sm,
+            ...buttonStyles
+          },
+        },
+      },
+    }
   },
 });
 

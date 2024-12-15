@@ -25,9 +25,8 @@ export const StyledCard = styled(Card)`
 export const StyledCardContent = styled(CardContent)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   height: 100%!important;
-  padding: 0!important;
+  padding: ${spacing.sm}!important;
 `;
 
 export const StyledListItemContainer = styled(Box)`
@@ -41,7 +40,8 @@ export const StyledListItemContainer = styled(Box)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    padding: ${spacing.md};
   }
 `;
 

@@ -1,17 +1,16 @@
 import {ListItem } from "@mui/material";
 import styled from "styled-components";
-import { colors, spacing, fontSize } from "../../styles/constants";
+import { colors, spacing, fontSize, borderRadius } from "../../styles/constants";
 import { Link } from "react-router-dom";
 
 export const SidebarContainer = styled.div`
   width: 350px;
   background: ${colors.white}; 
-  padding: ${spacing.lg};     
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100vh;
-  border-right: 1px solid ${colors.gray};
+  border-right: 2px solid ${colors['gray-dk']};
 `;
 
 export const StyledListItem = styled(ListItem)`
@@ -32,6 +31,12 @@ export const StyledLink = styled(Link)`
   display: block;
   font-size: ${fontSize.md};
   padding: ${spacing.sm} ${spacing.md};
+
+  span {
+    display: inline-block;
+    font-size: ${fontSize.lg};
+    width: 2rem
+  }
 `;
 
 export const LogoContainer = styled.div`
@@ -44,4 +49,31 @@ export const LogoContainer = styled.div`
     height: ${spacing.xl};
     margin-right: ${spacing.md};
   }
+`;
+
+export const StyledUserContainer = styled.div`
+  background: linear-gradient(70deg, ${colors["primary-lt"]} 0%, ${colors["primary-dk"]} 90%);
+  padding: ${spacing.md} ${spacing.md};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  img {
+    width: ${spacing.xxl};
+    height: ${spacing.xxl};
+    border: 2px solid ${colors.white};
+    padding: 2px;
+    border-radius: ${borderRadius.round};
+  }
+
+  button, p {
+    color: ${colors.white};
+    font-weight: 600;
+  }
+`;
+
+export const StyledNavigationContainer = styled.div`
+  padding: ${spacing.lg};
+  display: flex;
+  flex-direction: column;
 `;

@@ -14,7 +14,7 @@ const MainContent: React.FC<MainContentProps> = ({ title, text, children }) => {
       <Typography variant="h2">
         {title}
       </Typography>
-      <Typography variant="subtitle1">
+      <Typography variant="h5">
         {text}
       </Typography>
         {children}

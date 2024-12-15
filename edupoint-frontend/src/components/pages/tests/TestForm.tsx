@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, Card, CardContent, IconButton, Select, MenuItem } from '@mui/material';
+import { Box, Button, TextField, Typography, Card, CardContent, IconButton, Select, MenuItem, CardHeader } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MainContent from '../../mainContent/MainContent';
@@ -134,14 +134,14 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
 
         {questions.map((question) => (
           <Card key={question.id}>
+            <Box display="flex" justifyContent="space-between" alignItems="center" width="100%" position="relative">
+              <CardHeader title={`Question ${question.id}`}/>   
+              <IconButton color="error" onClick={() => deleteQuestion(question.id)} style={{position: 'absolute', right: spacing.sm}}>
+                <DeleteIcon />
+              </IconButton>
+            </Box>
             <CardContent>
               <Box display="flex" flexDirection="column" alignItems="flex-start"  gap={spacing.sm}>
-                <Box display="flex" justifyContent="space-between" alignItems="center" width="100%">
-                  <Typography variant="h4">Question {question.id}</Typography>
-                  <IconButton color="error" onClick={() => deleteQuestion(question.id)}>
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
                 <TextField
                   label="Question Text"
                   variant="outlined"

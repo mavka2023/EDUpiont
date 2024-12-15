@@ -40,8 +40,7 @@ const LogoContainer = styled(Link)`
 `;
 
 const LogoImage = styled.img`
-    width: 40px;
-    height: 40px;
+    width: 60px;
 
     &:hover {
             animation: ${logoShake} 0.7s infinite ease-in-out;
@@ -51,7 +50,7 @@ const LogoImage = styled.img`
 const AnimatedLogo: React.FC = () => {
     return (
         <LogoContainer to="/">
-                <LogoImage src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" alt="EduPoint logo" />
+                <LogoImage src="/logo.png" alt="EduPoint logo" />
                 <Typography variant="h1">EduPoint</Typography>
         </LogoContainer>
     );

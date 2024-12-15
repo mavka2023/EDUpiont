@@ -1,18 +1,22 @@
 export const colors = {
-    primary: '#3498db',
+    'primary-lt': '#6E5BE3',
+    primary: '#7F6BFF',
+    'primary-dk': '#4c3da0',
     secondary: '#2ecc71',
     background: '#ecf0f1',
-    text: '#2c3e50',
-    white: '#ffffff',
+    white: '#fefefe',
     black: '#000000',
-    gray: '#D4D4D4',
-    'gray-lt': '#F8F8F8',
+    gray: '#ededed',
+    'gray-lt': '#FCFCFC',
+    'gray-dk': '#b9b9b9',
+    'font-header': '#383838',
+    'font-body': '#494949'
 };
 
 export const spacing = {
     xs: '0.25rem',
     sm: '0.5rem',
-    md: '1rem',
+    md: '1.25rem',
     lg: '1.5rem',
     xl: '2rem',
     xxl: '2.5rem',
@@ -21,10 +25,10 @@ export const spacing = {
 export const fontSize = {
     xs: '0.75rem',
     sm: '0.875rem',
-    md: '1rem',
-    lg: '1.125rem',
-    xl: '1.5rem',
-    xxl: '2rem',
+    md: '1.05rem',
+    lg: '1.15rem',
+    xl: '2.15rem',
+    xxl: '2.5rem',
 };
 
 export const boxShadow = {
@@ -35,7 +39,8 @@ export const boxShadow = {
 
 export const borderRadius = {
     sm: '4px',
-    md: '8px',
-    lg: '12px',
-    xl: '16px',
+    md: '10px',
+    lg: '16px',
+    xl: '20px',
+    round: '360px',
 };

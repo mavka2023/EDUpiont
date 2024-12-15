@@ -33,37 +33,37 @@ const ViewNote: React.FC = () => {
                             <ReactMarkdown
                                 components={{
                                 h1: ({ children }) => (
-                                    <h1 style={{ fontSize: fontSize.xxl, fontWeight: 400, color: colors.text, lineHeight: 1.2 }}>
+                                    <h1 style={{ fontSize: fontSize.xxl, fontWeight: 400, color: colors['font-header'], lineHeight: 1.2 }}>
                                         {children}
                                     </h1>
                                 ),
                                 h2: ({ children }) => (
-                                    <h2 style={{ fontSize: fontSize.xl, fontWeight: 400, color: colors.text, lineHeight: 1.3 }}>
+                                    <h2 style={{ fontSize: fontSize.xl, fontWeight: 400, color: colors['font-header'], lineHeight: 1.3 }}>
                                         {children}
                                     </h2>
                                 ),
                                 h3: ({ children }) => (
-                                    <h3 style={{ fontSize: fontSize.lg, fontWeight: 600, color: colors.text, lineHeight: 1.4 }}>
+                                    <h3 style={{ fontSize: fontSize.lg, fontWeight: 600, color: colors['font-header'], lineHeight: 1.4 }}>
                                         {children}
                                     </h3>
                                 ),
                                 h4: ({ children }) => (
-                                    <h4 style={{ fontSize: fontSize.md, fontWeight: 500, color: colors.text, lineHeight: 1.5 }}>
+                                    <h4 style={{ fontSize: fontSize.md, fontWeight: 500, color: colors['font-header'], lineHeight: 1.5 }}>
                                         {children}
                                     </h4>
                                 ),
                                 h5: ({ children }) => (
-                                    <h5 style={{ fontSize: fontSize.sm, fontWeight: 500, color: colors.text, lineHeight: 1.6 }}>
+                                    <h5 style={{ fontSize: fontSize.sm, fontWeight: 500, color: colors['font-header'], lineHeight: 1.6 }}>
                                         {children}
                                     </h5>
                                 ),
                                 h6: ({ children }) => (
-                                    <h6 style={{ fontSize: fontSize.xs, fontWeight: 300, color: colors.text, lineHeight: 1.7 }}>
+                                    <h6 style={{ fontSize: fontSize.xs, fontWeight: 300, color: colors['font-header'], lineHeight: 1.7 }}>
                                         {children}
                                     </h6>
                                 ),
                                 p: ({ children }) => (
-                                    <p style={{ fontSize: fontSize.md, lineHeight: 1.5, color: colors.text, marginBottom: spacing.sm }}>
+                                    <p style={{ fontSize: fontSize.md, lineHeight: 1.5, color: colors['font-header'], marginBottom: spacing.sm }}>
                                         {children}
                                     </p>
                                 ),
@@ -73,7 +73,7 @@ const ViewNote: React.FC = () => {
                                     </ul>
                                 ),
                                 li: ({ children }) => (
-                                    <li style={{ fontSize: fontSize.md, color: colors.text, marginBottom: spacing.xs }}>
+                                    <li style={{ fontSize: fontSize.md, color: colors['font-header'], marginBottom: spacing.xs }}>
                                         {children}
                                     </li>
                                 ),
@@ -84,7 +84,7 @@ const ViewNote: React.FC = () => {
                                             backgroundColor: colors['gray-lt'],
                                             borderLeft: `5px solid ${colors.primary}`,
                                             fontStyle: 'italic',
-                                            color: colors.text,
+                                            color: colors['font-header'],
                                         }}
                                     >
                                         {children}

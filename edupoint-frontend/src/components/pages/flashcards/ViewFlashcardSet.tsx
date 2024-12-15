@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, Button, Card, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import MainContent from '../../mainContent/MainContent';
-import { spacing } from '../../../styles/constants';
+import { colors, spacing } from '../../../styles/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 // Mock data for the flashcards
@@ -50,24 +50,26 @@ const ViewFlashcardSet: React.FC = () => {
                             <FlashcardText variant="h2">
                                 {currentFlashcard.question}
                             </FlashcardText>
+                            <FlashcardFlipText variant="h4">Click on the flashcard to flip 👆</FlashcardFlipText>
                         </FlashcardSide>
                         <FlashcardSide>
                             <FlashcardText variant="h2">
                                 {currentFlashcard.answer}
                             </FlashcardText>
+                            <FlashcardFlipText variant="h4">Click on the flashcard to flip 👆</FlashcardFlipText>
                         </FlashcardSide>
                     </FlashcardCard>
                 </FlashcardContainer>
                 <Box display="flex" justifyContent="space-between" alignItems="center" gap={spacing.md}>
-                    <IconButton onClick={prevFlashcard} disabled={flashcards.length <= 1}>
+                    <StyledIconButton onClick={prevFlashcard} disabled={flashcards.length <= 1}>
                         <ArrowBack />
-                    </IconButton>
-                    <Typography variant="body1">
-                        {currentIndex + 1} of {flashcards.length}
+                    </StyledIconButton>
+                    <Typography variant="h4">
+                        {currentIndex + 1} / {flashcards.length}
                     </Typography>
-                    <IconButton onClick={nextFlashcard} disabled={flashcards.length <= 1}>
+                    <StyledIconButton onClick={nextFlashcard} disabled={flashcards.length <= 1}>
                         <ArrowForward />
-                    </IconButton>
+                    </StyledIconButton>
                 </Box>
             </Box>
         </MainContent>
@@ -84,13 +86,14 @@ const FlashcardContainer = styled.div`
 `;
 
 const FlashcardCard = styled.div<{flipped: boolean}>`
-    width: 500px;
-    height: 300px;
+    width: 700px;
+    height: 400px;
     transform-style: preserve-3d;
     transition: transform 0.6s;
     display: flex;
     flex-direction: row;
     position: relative;
+    background: ${colors['gray-lt']};
 
     ${(props) => props.flipped && 'transform: rotateY(180deg);'}
 `;
@@ -101,7 +104,6 @@ const FlashcardSide = styled(Card)<{ front?: boolean }>`
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,5 +115,23 @@ const FlashcardText = styled(Typography)`
     padding: ${spacing.md};
     text-align: center;
 `;
+
+const FlashcardFlipText = styled(Typography)`
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    padding: ${spacing.sm};
+    background: ${colors['gray']};
+    border-top: 2px solid ${colors['gray-dk']};
+`
+
+const StyledIconButton = styled(IconButton)`
+    padding: ${spacing.xs}!important;
+    border: 2px solid ${colors['gray-dk']}!important;
+    background: ${colors.white}!important;
+`;
+
 
 export default ViewFlashcardSet;
