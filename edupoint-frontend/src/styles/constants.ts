@@ -27,8 +27,8 @@ export const fontSize = {
     sm: '0.875rem',
     md: '1.05rem',
     lg: '1.15rem',
-    xl: '2.15rem',
-    xxl: '2.5rem',
+    xl: '2rem',
+    xxl: '2.2rem',
 };
 
 export const boxShadow = {
@@ -40,7 +40,7 @@ export const boxShadow = {
 export const borderRadius = {
     sm: '4px',
     md: '10px',
-    lg: '16px',
+    lg: '14px',
     xl: '20px',
     round: '360px',
 };

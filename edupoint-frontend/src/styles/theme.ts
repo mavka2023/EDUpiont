@@ -46,19 +46,23 @@ const theme = createTheme({
           color: colors.primary,
           '&:hover': {
             backgroundColor: `${colors.primary}`,
+            color: colors.white,
           },
         },
+        sizeSmall: {
+          fontSize: fontSize.sm,
+          padding: `${spacing.xs} ${spacing.md}!important`,
+        }
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: borderRadius.lg,
+          borderRadius: borderRadius.xl,
           boxShadow: boxShadow.md,
           width: '100%',
           backgroundColor: colors.white,
           border: `2px solid ${colors['gray-dk']}`,
-        'border-radius': borderRadius.xl,
           padding: 0,
         },
       },
@@ -101,6 +105,16 @@ const theme = createTheme({
         root: {
           marginTop: spacing.xs,
           width: '100%',
+          borderRadius: `${borderRadius.lg}!important`,
+        },
+      },
+    },
+    MuiInput: {
+      styleOverrides: {
+        root: {
+          width: '100%',
+          marginTop: spacing.xs,
+          borderRadius: `${borderRadius.lg}!important`,
         },
       },
     },
@@ -109,6 +123,7 @@ const theme = createTheme({
         root: {
           marginTop: spacing.xs,
           width: '100%',
+          borderRadius: `${borderRadius.lg}!important`,
         },
       },
     },
@@ -116,6 +131,7 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
+          borderRadius: `${borderRadius.lg}!important`,
         },
       },
     },

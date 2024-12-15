@@ -178,6 +178,7 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
                     color="primary"
                     onClick={() => addOption(question.id)}
                     disabled={(question.options?.length || 0) >= 4}
+                    size='small'
                   >
                     Add Option
                   </Button>
