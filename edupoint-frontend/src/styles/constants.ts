@@ -14,7 +14,7 @@ export const colors = {
 };
 
 export const spacing = {
-    xs: '0.25rem',
+    xs: '0.5rem',
     sm: '0.75rem',
     md: '1.25rem',
     lg: '1.5rem',

@@ -6,7 +6,7 @@ const buttonStyles = {
   borderRadius: borderRadius.round,
   fontWeight: 600,
   fontSize: fontSize.md,
-  padding: `${spacing.sm} ${spacing.xxl}`,
+  padding: `${spacing.xs} ${spacing.xl}`,
   background: colors.primary,
   color: colors.white,
   letterSpacing: '1px',
