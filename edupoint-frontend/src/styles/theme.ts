@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { colors, spacing, fontSize, boxShadow, borderRadius } from './constants';
+import { colors, spacing, fontSize, boxShadow, borderRadius, mobileFontSize } from './constants';
 
 const buttonStyles = {
   textTransform: 'none',
@@ -12,6 +12,10 @@ const buttonStyles = {
   letterSpacing: '1px',
   '&:hover': {
     backgroundColor: colors['primary-lt'],
+  },
+  '@media (max-width:768px)': {
+    fontSize: fontSize.sm,
+    padding: `${spacing.xs} ${spacing.md}`,
   },
 }
 
@@ -28,6 +32,50 @@ const theme = createTheme({
     body2: { fontSize: fontSize.sm, lineHeight: 1.5, color: colors['font-body']  },
   },
   components: {
+    MuiTypography: {
+      styleOverrides: {
+      h1: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.xxl,
+        },
+      },
+      h2: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.xl,
+        },
+      },
+      h3: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.lg,
+        },
+      },
+      h4: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.md,
+        },
+      },
+      h5: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.lg,
+        },
+      },
+      h6: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.xs,
+        },
+      },
+      body1: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.md,
+        },
+      },
+      body2: {
+        '@media (max-width:768px)': {
+        fontSize: mobileFontSize.sm,
+      },
+    },
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -108,6 +156,9 @@ const theme = createTheme({
           borderRadius: `${borderRadius.lg}!important`,
         },
       },
+      defaultProps: {
+        size: window.innerWidth < 768 ? 'small' : 'medium',
+      },
     },
     MuiInput: {
       styleOverrides: {
@@ -159,9 +210,13 @@ const theme = createTheme({
       root: {
         fontSize: fontSize.xxl,
         fontWeight: 500,
-        // borderBottom: `1px solid ${colors['gray']}`,
         textAlign: 'center',
         paddingBottom: 0,
+
+        '@media (max-width:768px)': {
+          fontSize: mobileFontSize.lg,
+          paddingTop: spacing.sm,
+          },
       },
       },
     },
@@ -180,6 +235,7 @@ const theme = createTheme({
         fontSize: fontSize.md,
         color: colors['font-body'],
         textAlign: 'center',
+        
       },
       },
     },
@@ -191,6 +247,20 @@ const theme = createTheme({
           '> button': {
             margin: spacing.sm,
             ...buttonStyles
+          },
+          '@media (max-width:768px)': {
+            padding: `${spacing.sm} 0`,
+          },
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontSize: fontSize.md,
+          '@media (max-width:768px)': {
+            fontSize: mobileFontSize.md,
+            padding: `0 ${spacing.sm}`,
           },
         },
       },

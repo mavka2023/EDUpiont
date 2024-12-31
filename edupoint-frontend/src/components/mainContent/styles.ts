@@ -9,4 +9,9 @@ export const StyledMainContent = styled.main`
     width: 100%;
     background: ${colors['gray-lt']};
     overflow-y: auto;
+
+    @media (max-width: 768px) {
+        padding: ${spacing.md} ${spacing.sm};
+        gap: ${spacing.sm};
+    }
 `

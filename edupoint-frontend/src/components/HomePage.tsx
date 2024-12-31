@@ -12,7 +12,8 @@ export const PageContainer = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    max-width: 100vw;
+    width: 100%;
     background-color: ${colors.primary};
     padding: ${spacing.md};
 
@@ -20,6 +21,7 @@ export const PageContainer = styled.div`
         font-family: 'Jaro';
         color: ${colors.white};
         letter-spacing: 2px;
+        text-align: center;
     }
 
     h1 {
@@ -93,7 +95,7 @@ const HomePage: React.FC = () => {
                     what do you want to do today?
                 </Typography>
 
-                <Box display="flex" gap={spacing.md} marginTop={spacing.xl}>
+                <Box display="flex" gap={spacing.md} marginTop={spacing.xl} flexWrap={'wrap'} justifyContent={'center'}>
                     <ActionButton onClick={() => navigate('/notes')}>Notes</ActionButton>
                     <ActionButton onClick={() => navigate('/tests')}>Tests</ActionButton>
                     <ActionButton onClick={() => navigate('/flashcards')}>Flashcards</ActionButton>

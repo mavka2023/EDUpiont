@@ -8,30 +8,36 @@ const Tests = () => {
     {
       title: 'Test 1',
       link: '/tests/1',
-      showConfirmationModal: true,
+
     },
     {
       title: 'Test 2',
       link: '/tests/2',
-      showConfirmationModal: true,
     },
     {
       title: 'Test 3',
       link: '/tests/3',
-      showConfirmationModal: true,
     },    
     {
       title: 'Add new tests',
       icon: <AddIcon style={{ fontSize: 48 }} />,
       link: '/tests/create',
       hideMenu: true,
-
     },
   ]
 
+  const testsWithModal = tests.map((test, index) => {
+    return {...test, 
+      showModal: index !== tests.length - 1,
+      modalText: 'Are you sure you want to start this test?',
+      confrimationModalTitle: 'Start test',
+      modalButtonText: 'Start',
+    }
+  })
+
   return (
     <MainContent title="Tests" text="Here you can see and add your tests">
-      <List items={tests}></List>
+      <List items={testsWithModal}></List>
     </MainContent>
   );
 };

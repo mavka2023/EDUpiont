@@ -6,7 +6,6 @@ import MainContent from '../../mainContent/MainContent';
 import { colors, spacing } from '../../../styles/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
-// Mock data for the flashcards
 interface Flashcard {
     id: number;
     question: string;
@@ -29,7 +28,7 @@ const ViewFlashcardSet: React.FC = () => {
         setFlashcards(mockFlashcards);
     }, [flashcardsId]);
 
-    if (flashcards.length === 0) return <></>;  // If no flashcards, return empty fragment
+    if (flashcards.length === 0) return <></>; 
 
     const nextFlashcard = () => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % flashcards.length);
@@ -96,6 +95,21 @@ const FlashcardCard = styled.div<{flipped: boolean}>`
     background: ${colors['gray-lt']};
 
     ${(props) => props.flipped && 'transform: rotateY(180deg);'}
+
+    @media (max-width: 1000px) {
+        width: 450px;
+        height: 325px;
+    }
+
+    @media (max-width: 768px) {
+        width: 350px;
+        height: 300px;
+    }
+
+    @media (max-width: 450px) {
+        width: 275px;
+        height: 250px;
+    }
 `;
 
 const FlashcardSide = styled(Card)<{ front?: boolean }>`
@@ -113,6 +127,7 @@ const FlashcardSide = styled(Card)<{ front?: boolean }>`
 
 const FlashcardText = styled(Typography)`
     padding: ${spacing.md};
+    padding-top: 0;
     text-align: center;
 `;
 

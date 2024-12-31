@@ -187,7 +187,12 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
             </CardContent>
           </Card>
         ))}
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between"   sx={{
+            '@media (max-width:768px)': {
+              flexDirection: 'column',
+              gap: spacing.md
+            }
+          }}>
           <Button
             variant="contained"
             color="primary"

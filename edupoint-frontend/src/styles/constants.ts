@@ -7,7 +7,7 @@ export const colors = {
     white: '#fefefe',
     black: '#000000',
     gray: '#ededed',
-    'gray-lt': '#FCFCFC',
+    'gray-lt': '#F8F8F8',
     'gray-dk': '#b9b9b9',
     'font-header': '#383838',
     'font-body': '#494949'
@@ -15,7 +15,7 @@ export const colors = {
 
 export const spacing = {
     xs: '0.25rem',
-    sm: '0.5rem',
+    sm: '0.75rem',
     md: '1.25rem',
     lg: '1.5rem',
     xl: '2rem',
@@ -29,6 +29,15 @@ export const fontSize = {
     lg: '1.15rem',
     xl: '2rem',
     xxl: '2.2rem',
+};
+
+export const mobileFontSize = {
+    xs: '0.75rem',
+    sm: '1rem',
+    md: '1rem',
+    lg: '1.1rem',
+    xl: '1.4rem',
+    xxl: '1.75rem',
 };
 
 export const boxShadow = {
