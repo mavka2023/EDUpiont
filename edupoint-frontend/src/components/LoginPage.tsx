@@ -4,62 +4,53 @@ import {login} from '../redux/authSlice';
 import {useNavigate} from 'react-router-dom';
 import {Button, TextField, Typography, Box} from '@mui/material';
 import styled from 'styled-components';
+import { borderRadius, colors, fontSize, spacing } from '../styles/constants';
 
-const PageContainer = styled.div`
+export const PageContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: #f3f3f3;
-    box-sizing: border-box;
-    padding: 20px;
-    margin: 0;
+    background-color: ${colors['gray-lt']};
+    padding: ${spacing.md};
 `;
 
 
-const FormContainer = styled.div`
+export const FormContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 30px;
-    background: #fff;
-    border-radius: 12px;
+    padding: ${spacing.lg};
+    background: ${colors.white};
+    border-radius: ${borderRadius.md};
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 100%;
 `;
 
-const LogoContainer = styled.div`
+export const LogoContainer = styled.div`
     display: flex;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: ${spacing.md};
     width: 100%;
 
     img {
         width: 48px;
         height: 48px;
-        margin-right: 10px;
-    }
-
-    h1 {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
+        margin-right: ${spacing.md};
     }
 `;
 
-const ForgotPassword = styled.a`
-    font-size: 14px;
-    color: #888;
-    margin-top: 10px;
-    text-decoration: none;
-    cursor: pointer;
+export const ForgotPassword = styled.a`
+    font-size: ${fontSize.sm};
+    color: ${colors['gray-dk']};
+    margin: ${spacing.md} 0 ${spacing.md};
     align-self: flex-start;
 
     &:hover {
-        color: #555;
-        text-decoration: underline;
+        color: ${colors.primary};
+        text-decoration: underline!important;
     }
 `;
 
@@ -95,42 +86,26 @@ const LoginPage: React.FC = () => {
                     Sign in
                 </Typography>
 
-
                 <TextField
                     label="E-mail"
                     variant="outlined"
                     margin="normal"
                     fullWidth
-                    InputProps={{
-                        style: {borderRadius: '8px'},
-                    }}
                 />
                 <TextField
                     label="Password"
                     type="password"
                     variant="outlined"
-                    margin="normal"
                     fullWidth
-                    InputProps={{
-                        style: {borderRadius: '8px'},
-                    }}
                 />
 
-                <ForgotPassword href="#">Forgot password?</ForgotPassword>
+                {/* <ForgotPassword href="#">Forgot password?</ForgotPassword> */}
 
                 <Button
                     variant="contained"
-                    style={{
-                        backgroundColor: '#7c4dff',
-                        color: '#fff',
-                        marginTop: '20px',
-                        padding: '10px 20px',
-                        textTransform: 'none',
-                        fontWeight: 'bold',
-                        borderRadius: '8px',
-                    }}
                     fullWidth
                     onClick={handleLogin}
+                    style={{marginTop: spacing.md}}
                 >
                     Login
                 </Button>

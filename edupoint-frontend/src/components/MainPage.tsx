@@ -2,20 +2,8 @@ import React from 'react';
 import {Button, Typography} from '@mui/material';
 import styled from 'styled-components';
 import {useNavigate} from 'react-router-dom';
-
-const PageContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    width: 100vw;
-    background-color: #7c4dff;
-    color: #fff;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
-`;
+import { ActionButton, Logo, PageContainer } from './HomePage';
+import { spacing } from '../styles/constants';
 
 const LoginButton = styled(Typography)`
     position: absolute;
@@ -39,32 +27,6 @@ const ContentContainer = styled.div`
     max-width: 600px;
 `;
 
-const Logo = styled.img`
-    width: 120px;
-    position: absolute;
-    top: 65px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-`;
-
-const StyledButton = styled(Button)`
-    && {
-        border: 2px solid #fff;
-        color: #fff;
-        text-transform: none;
-        font-size: 16px;
-        font-weight: bold;
-        padding: 15px 50px;
-        border-radius: 8px;
-        margin-top: 30px;
-
-        &:hover {
-            background-color: rgba(255, 255, 255, 0.9);
-        }
-    }
-`;
-
 const MainPage: React.FC = () => {
     const navigate = useNavigate();
 
@@ -74,33 +36,14 @@ const MainPage: React.FC = () => {
             <LoginButton onClick={() => navigate('/login')}>Log In</LoginButton>
 
             <ContentContainer>
-
-
-                <Typography
-                    variant="h1"
-                    gutterBottom
-                    style={{
-                        fontWeight: 'bold',
-                        fontSize: '100px',
-                        letterSpacing: '2px',
-                        marginBottom: '100px',
-                        fontFamily: 'Jaro, sans-serif',
-                    }}
-                >
+                <Typography variant="h1">
                     EduPoint
                 </Typography>
+
                 <Logo src="logo.png" alt="EduPoint Logo"/>
 
 
-                <Typography
-                    variant="h6"
-                    style={{
-                        fontWeight: '500',
-                        lineHeight: '1.5',
-                        marginBottom: '20px',
-
-                    }}
-                >
+                <Typography variant="h3" style={{marginBottom: spacing.xl}}>
                     <span style={{fontWeight: 'bold'}}>Simple</span> and{' '}
                     <span style={{fontWeight: 'bold'}}>fast</span> to get your<br/>{' '}
                     <span style={{fontWeight: 'bold'}}>notes</span>,{' '}
@@ -109,9 +52,9 @@ const MainPage: React.FC = () => {
                 </Typography>
 
 
-                <StyledButton onClick={() => navigate('/register')}>
+                <ActionButton onClick={() => navigate('/register')}>
                     Get Started
-                </StyledButton>
+                </ActionButton>
             </ContentContainer> </PageContainer>
     );
 };

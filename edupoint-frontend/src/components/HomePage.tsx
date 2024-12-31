@@ -1,35 +1,49 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Box } from '@mui/material';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { colors, spacing } from '../styles/constants';
 
-const PageContainer = styled.div`
+export const PageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100vw;
-    background-color: #7c4dff;
-    color: #fff;
-    position: relative;
-    padding: 20px;
-    box-sizing: border-box;
+    background-color: ${colors.primary};
+    padding: ${spacing.md};
+
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: 'Jaro';
+        color: ${colors.white};
+        letter-spacing: 2px;
+    }
+
+    h1 {
+        font-size: 4rem;
+    }
+
+    h2 {
+        font-size: 3rem;
+        font-weight: 400;
+    }
+
+    h3 {
+        font-size: 1.75rem;
+        font-weight: 400;
+        color: ${colors['gray-lt']};
+    }
+
 `;
 
-const ButtonContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    gap: 20px; /
-    margin-top: 50px; 
-`;
 
-const ActionButton = styled(Button)`
+export const ActionButton = styled(Button)`
     && {
-        border: 2px solid #fff;
-        color: #fff;
+        border: 2px solid ${colors.white};
+        color: ${colors.white};
         font-weight: bold;
         text-transform: none; 
         font-size: 16px;
@@ -42,10 +56,9 @@ const ActionButton = styled(Button)`
     }
 `;
 
-const Logo = styled.img`
+export const Logo = styled.img`
     width: 120px;
-    position: relative;
-    margin-top: -60px; 
+    margin-top: -40px; 
     z-index: 2;
 `;
 
@@ -53,7 +66,7 @@ const ContentContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 30px; 
+    margin-top: ${spacing.md}; 
     z-index: 1;
 `;
 
@@ -63,55 +76,28 @@ const HomePage: React.FC = () => {
 
     return (
         <PageContainer>
-            <Typography
-                variant="h1"
-                style={{
-                    fontWeight: 'bold',
-                    fontSize: '64px',
-                    marginBottom: '20px',
-                    fontFamily: 'Jaro, sans-serif',
-                    zIndex: 1,
-                }}
-            >
+            <Typography variant="h1">
                 EduPoint
             </Typography>
 
             <Logo src="logo.png" alt="EduPoint Logo" />
 
             <ContentContainer>
-                <Typography
-                    variant="h5"
-                    style={{
-                        fontWeight: '500',
-                        marginBottom: '15px',
-                    }}
-                >
+                <Typography variant="h3">
                     Hello
                 </Typography>
-                <Typography
-                    variant="h4"
-                    style={{
-                        fontWeight: 'bold',
-                        marginBottom: '15px',
-                    }}
-                >
+                <Typography variant="h2" >
                     {user?.name} {user?.surname}
                 </Typography>
-                <Typography
-                    variant="h6"
-                    style={{
-                        fontWeight: '400',
-                        marginBottom: '30px',
-                    }}
-                >
+                <Typography variant="h3">
                     what do you want to do today?
                 </Typography>
 
-                <ButtonContainer>
+                <Box display="flex" gap={spacing.md} marginTop={spacing.xl}>
                     <ActionButton onClick={() => navigate('/notes')}>Notes</ActionButton>
                     <ActionButton onClick={() => navigate('/tests')}>Tests</ActionButton>
                     <ActionButton onClick={() => navigate('/flashcards')}>Flashcards</ActionButton>
-                </ButtonContainer>
+                </Box>
             </ContentContainer>
         </PageContainer>
     );
