@@ -34,19 +34,19 @@ const Sidebar: React.FC = () => {
     setMobileMenuOpen((prev) => !prev);
   };
 
-  const renderNavigation = () => (
+  const renderNavigation = (toggleMobileMenu?: () => void) => (
     <List>
-      <StyledListItem>
+      <StyledListItem onClick={toggleMobileMenu ? toggleMobileMenu : undefined}>
         <StyledLink to="/tests" style={{ background: location.pathname === '/tests' ? colors.gray : 'none' }}>
           <span>📝</span>Tests
         </StyledLink>
       </StyledListItem>
-      <StyledListItem>
+      <StyledListItem onClick={toggleMobileMenu ? toggleMobileMenu : undefined}>
         <StyledLink to="/notes" style={{ background: location.pathname === '/notes' ? colors.gray : 'none' }}>
           <span>🗒️</span>Notes
         </StyledLink>
       </StyledListItem>
-      <StyledListItem>
+      <StyledListItem onClick={toggleMobileMenu ? toggleMobileMenu : undefined}>
         <StyledLink to="/flashcards" style={{ background: location.pathname === '/flashcards' ? colors.gray : 'none' }}>
           <span>📇</span>Flashcards
         </StyledLink>
@@ -96,7 +96,7 @@ const Sidebar: React.FC = () => {
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
           </Box>
-              {renderNavigation()}
+              {renderNavigation(toggleMobileMenu)}
             </div>
             <div>
               <Box sx={{ marginTop: 4, display: 'flex', alignItems: 'center', justifySelf: "flex-end" }}>
