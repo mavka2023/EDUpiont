@@ -1,8 +1,8 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
-import {login} from '../redux/authSlice';
-import {useNavigate} from 'react-router-dom';
-import {Button, TextField, Typography, Box} from '@mui/material';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import styled from 'styled-components';
 import { borderRadius, colors, fontSize, spacing } from '../styles/constants';
 
@@ -15,7 +15,6 @@ export const PageContainer = styled.div`
     background-color: ${colors['gray-lt']};
     padding: ${spacing.md};
 `;
-
 
 export const FormContainer = styled.div`
     display: flex;
@@ -58,7 +57,21 @@ const LoginPage: React.FC = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+
     const handleLogin = () => {
+        if (!email || !password) {
+            setError('Please fill in all fields');
+            return;
+        }
+
+        if (!validateEmail(email)) {
+            setError('Invalid email address');
+            return;
+        }
+
         dispatch(
             login({
                 id: '12345',
@@ -72,40 +85,58 @@ const LoginPage: React.FC = () => {
         navigate('/dashboard');
     };
 
+    const validateEmail = (email: string) => {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    };
+
     return (
         <PageContainer>
             <FormContainer>
-
                 <LogoContainer>
-                    <img src="logo.png" alt="EduPoint Logo"/>
+                    <img src="logo.png" alt="EduPoint Logo" />
                     <h1>EduPoint</h1>
                 </LogoContainer>
 
-
-                <Typography variant="h4" gutterBottom style={{fontWeight: 'bold', marginBottom: '20px'}}>
+                <Typography variant="h4" gutterBottom style={{ fontWeight: 'bold', marginBottom: '20px' }}>
                     Sign in
                 </Typography>
 
                 <TextField
                     label="E-mail"
-                    variant="outlined"
+                    color="secondary"
                     margin="normal"
                     fullWidth
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    error={!!error}
+                    helperText={error && !email ? 'E-mail is required' : ''}
+                    inputProps={{ autoComplete: 'off' }}
                 />
                 <TextField
                     label="Password"
                     type="password"
-                    variant="outlined"
+                    color="secondary"
                     fullWidth
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    error={!!error}
+                    helperText={error && !password ? 'Password is required' : ''}
+                    inputProps={{ autoComplete: 'off' }}
                 />
 
-                {/* <ForgotPassword href="#">Forgot password?</ForgotPassword> */}
+                {error && (
+                    <Typography color="error" variant="body2" style={{ marginTop: '10px' }}>
+                        {error}
+                    </Typography>
+                )}
 
                 <Button
                     variant="contained"
                     fullWidth
                     onClick={handleLogin}
-                    style={{marginTop: spacing.md}}
+                    style={{ marginTop: spacing.md }}
                 >
                     Login
                 </Button>

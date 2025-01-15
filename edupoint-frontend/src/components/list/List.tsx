@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Box, Typography, IconButton, Menu, MenuItem } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, IconButton, Menu, MenuItem, Snackbar, Alert } from '@mui/material';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Button } from '@mui/material';
 import { colors, spacing } from '../../styles/constants';
 import { StyledCard, StyledCardContent, StyledListContainer, StyledListItemContainer, StyledMenuIconButton } from './styles';
@@ -17,16 +17,29 @@ export interface ListItemProps {
   modalButtonText?: string;
 }
 
-const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
+const List: React.FC<{ items: ListItemProps[] }> = ({ items: givenItems }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [openModal, setOpenModal] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [selectedLink, setSelectedLink] = useState<string | null>(null);
   const [deleteIndex, setDeleteIndex] = useState<number | null>(null);
+  const [selectedID, setSelectedID] = useState<string | null>(null);
+  const [items, setItems] = useState<ListItemProps[]>([]);
+  const [toast, setToast] = useState<{ open: boolean; message: string; severity: 'success' | 'error' }>({
+    open: false,
+    message: '',
+    severity: 'success',
+  });
+
   const navigate = useNavigate();
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+  useEffect(() => {
+    setItems(givenItems);
+  }, []);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLElement>, id: string) => {
     setAnchorEl(event.currentTarget);
+    setSelectedID(id);
   };
 
   const handleMenuClose = () => {
@@ -62,10 +75,21 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
 
   const handleDeleteConfirm = () => {
     if (deleteIndex !== null) {
-      // Add delete logic here
       console.log(`Deleting item at index ${deleteIndex}`);
+      setItems(items.filter((_, index) => index.toString() !== selectedID));
     }
     handleDeleteModalClose();
+  };
+
+  const handleCopyLink = (link: string) => {
+    navigator.clipboard.writeText(window.location.href + "/" + link.split("/")[link.split("/").length-1])
+      .then(() => {
+        setToast({ open: true, message: 'Link copied to clipboard!', severity: 'success' });
+      })
+      .catch(() => {
+        setToast({ open: true, message: 'Failed to copy link.', severity: 'error' });
+      });
+    handleMenuClose();
   };
 
   const renderMenu = (link: string, index: number) => (
@@ -75,7 +99,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
       open={Boolean(anchorEl)}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => { handleMenuClose(); navigator.clipboard.writeText(link); }}>Copy link</MenuItem>
+      <MenuItem onClick={() => handleCopyLink(link)}>Copy link</MenuItem>
       <MenuItem onClick={() => { handleMenuClose(); navigate(`edit/${index}`); }}>Edit</MenuItem>
       <MenuItem onClick={() => { handleMenuClose(); handleDeleteModalOpen(index); }}>Delete</MenuItem>
     </Menu>
@@ -120,7 +144,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
                     <StyledMenuIconButton
                       aria-controls={`menu-${index}`}
                       aria-haspopup="true"
-                      onClick={handleMenuOpen}
+                      onClick={(event: any) => handleMenuOpen(event, index.toString())}
                     >
                       <MoreVertIcon />
                     </StyledMenuIconButton>
@@ -136,11 +160,11 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
       <Dialog open={openModal} onClose={handleModalClose}>
         <DialogTitle>{items.find((item) => item.link === selectedLink)?.modalText}</DialogTitle>
         <DialogActions>
-          <Button onClick={handleModalClose} color="primary">
+          <Button onClick={handleModalClose} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleConfirmClick} color="primary">
-            {items.find((item) => item.link === selectedLink)?.modalButtonText}
+            {items.find((item) => item.link === selectedLink)?.modalButtonText || "Start"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -153,7 +177,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteModalClose} color="primary">
+          <Button onClick={handleDeleteModalClose} color="secondary">
             Cancel
           </Button>
           <Button onClick={handleDeleteConfirm} color="primary">
@@ -161,6 +185,21 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={toast.open}
+        autoHideDuration={3000}
+        onClose={() => setToast({ ...toast, open: false })}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+      >
+        <Alert
+          onClose={() => setToast({ ...toast, open: false })}
+          severity={toast.severity}
+          sx={{ width: '100%' }}
+        >
+          {toast.message}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

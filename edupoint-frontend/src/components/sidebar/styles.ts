@@ -79,6 +79,7 @@ export const StyledUserContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  justify-self: flex-start;
 
   img {
     width: ${spacing.xxl};

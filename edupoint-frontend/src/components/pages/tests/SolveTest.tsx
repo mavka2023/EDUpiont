@@ -87,7 +87,7 @@ const SolveTest: React.FC = () => {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleModalClose} color="primary">
+                    <Button onClick={handleModalClose} color="secondary">
                         Cancel
                     </Button>
                     <Button onClick={handleConfirmClick} color="primary">
@@ -102,11 +102,11 @@ const SolveTest: React.FC = () => {
                 <DialogTitle>Test Score</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Your score is 57%.
+                        Your score is 100%.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleScoreModalClose} color="primary">
+                    <Button onClick={handleScoreModalClose} color="secondary">
                         Close
                     </Button>
                 </DialogActions>

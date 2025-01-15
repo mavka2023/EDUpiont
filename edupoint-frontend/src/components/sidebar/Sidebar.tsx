@@ -84,28 +84,28 @@ const Sidebar: React.FC = () => {
         </IconButton>
         <Drawer anchor="left" open={mobileMenuOpen} onClose={toggleMobileMenu}>
           <Box style={{height: '100%'}} padding={`${spacing.md} ${spacing.sm}`} display="flex" flexDirection="column" justifyContent={"space-between"}>
-            <div>
-              <Box display="flex" justifyContent="space-between" alignItems="center">
+            <Box width="100%">
+              <Box display="flex" justifyContent="start" alignItems="start">
               <IconButton onClick={toggleMobileMenu}>
                 <CloseIcon />
               </IconButton>
               <IconButton onClick={handleMenuOpen}>
-            <SettingsIcon />
-          </IconButton>
-          <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
-            <MenuItem onClick={handleLogout}>Logout</MenuItem>
-          </Menu>
-          </Box>
+                <SettingsIcon />
+              </IconButton>
+              <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+              </Menu>
+              </Box>
               {renderNavigation(toggleMobileMenu)}
-            </div>
-            <div>
+            </Box>
+            <Box display="flex" justifyContent="start" alignItems="start">
               <Box sx={{ marginTop: 4, display: 'flex', alignItems: 'center', justifySelf: "flex-end" }}>
                 <Avatar alt={user?.name} src={user?.profilePicture} />
                 <Typography variant="body1" sx={{ marginLeft: '10px' }}>
                   {user?.name} {user?.surname}
                 </Typography>
               </Box>
-            </div>
+            </Box>
           </Box>
         </Drawer>
       </MobileMenuContainer>

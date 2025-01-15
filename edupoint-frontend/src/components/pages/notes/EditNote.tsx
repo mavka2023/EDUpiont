@@ -4,7 +4,20 @@ import  NoteForm from './NoteForm';
 const existingNote = {
   id: 1,
   title: 'Sample Note',
-  content: 'This is a sample note content for demonstration.',
+  content: `# Mocked Note
+
+This is a mocked Markdown note for demonstration purposes.
+
+## Section 1
+- Item 1
+- Item 2
+
+## Section 2
+> "This is a blockquote in the note."
+
+## Conclusion
+Markdown makes notes look structured and easy to read.
+`,
 };
 
 const EditNote: React.FC = () => {
