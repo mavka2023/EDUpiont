@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Box, Typography, Button, Card, IconButton } from '@mui/material';
 import styled from 'styled-components';
 import MainContent from '../../mainContent/MainContent';
-import { colors, spacing } from '../../../styles/constants';
+import { colors, fontSize, spacing } from '../../../styles/constants';
 import { ArrowBack, ArrowForward } from '@mui/icons-material';
 
 interface Flashcard {
@@ -37,6 +37,16 @@ const ViewFlashcardSet: React.FC = () => {
     };
 
     const currentFlashcard = flashcards[currentIndex];
+
+    if (flashcards.length === 0) {
+        return (
+          <MainContent title="Note Not Found">
+            <p style={{ color: colors['font-header'], fontSize: fontSize.md }}>
+            The flashcards you are looking for do not exist.
+            </p>
+          </MainContent>
+        );
+      }
 
     return (
         <MainContent title={`View Flashcard Set #${flashcardsId}`}>

@@ -1,32 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Typography, Card, CardContent, IconButton, Select, MenuItem } from '@mui/material';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MainContent from '../../mainContent/MainContent';
-import { spacing } from '../../../styles/constants';
-import TestForm from './TestForm';
+import React from 'react';
+import TestForm, { Test } from './TestForm';
+import { useNavigate } from 'react-router-dom';
 
-interface Question {
-  id: number;
-  type: 'text' | 'multipleChoice';
-  question: string;
-  options?: string[];
-}
+const CreateTest: React.FC = () => {
+  const navigate = useNavigate();
 
-export interface Test {
-  id?: number;
-  name: string;
-  questions: Question[];
-}
+  const handleSave = (test: Test) => {
+    const storedTests = localStorage.getItem('tests');
+    const tests = storedTests ? JSON.parse(storedTests) : [];
 
-const CreateTest = () => {
+    const newTestId = Math.random().toString(36).substr(2, 9);
+    const newTest = { ...test, id: newTestId };
+    const updatedTests = [...tests, newTest];
 
-  const onSave = (test: Test) => {
-    console.log('Test saved:', test);
-  }
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+    navigate('/tests');
+  };
 
-  
-  return <TestForm onSave={onSave} />;
+  return <TestForm onSave={handleSave} />;
 };
 
 export default CreateTest;

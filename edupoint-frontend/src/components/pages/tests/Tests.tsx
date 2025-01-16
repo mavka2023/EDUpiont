@@ -4,40 +4,40 @@ import MainContent from '../../mainContent/MainContent';
 import AddIcon from '@mui/icons-material/Add';
 
 const Tests = () => {
-  const tests: ListItemProps[] = [
-    {
-      title: 'Test 1',
-      link: '/tests/1',
+  const storedTests = localStorage.getItem('tests');
+  const testsFromStorage = storedTests ? JSON.parse(storedTests) : [];
 
-    },
-    {
-      title: 'Test 2',
-      link: '/tests/2',
-    },
-    {
-      title: 'Test 3',
-      link: '/tests/3',
-    },    
-    {
-      title: 'Add new tests',
-      icon: <AddIcon style={{ fontSize: 48 }} />,
-      link: '/tests/create',
-      hideMenu: true,
-    },
-  ]
-
-  const testsWithModal = tests.map((test, index) => {
-    return {...test, 
-      showModal: index !== tests.length - 1,
+  const tests: ListItemProps[] = testsFromStorage.map(
+    (test: { id: number; name: string }) => ({
+      title: test.name,
+      link: `/tests/${test.id}`,
+      onDelete: () => handleDelete(test.id.toString()),
+      showModal: true,
       modalText: 'Are you sure you want to start this test?',
       confrimationModalTitle: 'Start test',
       modalButtonText: 'Start',
-    }
-  })
+    })
+  );
+
+  tests.push({
+    title: 'Add new tests',
+    icon: <AddIcon style={{ fontSize: 48 }} />,
+    link: '/tests/create',
+    hideMenu: true,
+    showModal: false,
+  });
+
+  const handleDelete = (id: string) => {
+    const storedTests = localStorage.getItem('tests');
+    const tests = storedTests ? JSON.parse(storedTests) : [];
+
+    const updatedTests = tests.filter((test: { id: string }) => test.id !== id);
+    localStorage.setItem('tests', JSON.stringify(updatedTests));
+  };
 
   return (
     <MainContent title="Tests" text="Here you can see and add your tests">
-      <List items={testsWithModal}></List>
+      <List items={tests}></List>
     </MainContent>
   );
 };

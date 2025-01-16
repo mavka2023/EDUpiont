@@ -1,20 +1,35 @@
 import React from 'react';
-import { Test } from './CreateTest';
+import { useNavigate } from 'react-router-dom';
 import TestForm from './TestForm';
-
-const existingTest = {
-  id: 1,
-  name: 'Sample Test',
-  questions: [
-    { id: 1, type: 'text' as const, question: 'What is React?', options: [] },
-    { id: 2, type: 'multipleChoice' as const, question: 'What is the capital of France?', options: ['Paris', 'London', 'Berlin'] },
-  ],
-};
+import { Test } from './TestForm';
 
 const EditTest: React.FC = () => {
-  const handleSave = (test: Test) => {
-    console.log('Test saved:', test);
+  const navigate = useNavigate();
+
+  const handleSave = (updatedTest: Test) => {
+    const storedTests = localStorage.getItem('tests');
+    const tests = storedTests ? JSON.parse(storedTests) : [];
+
+    const testIndex = tests.findIndex((test: { id: string }) => test.id === updatedTest.id);
+
+    if (testIndex !== -1) {
+      tests[testIndex] = updatedTest;
+      localStorage.setItem('tests', JSON.stringify(tests));
+    }
+
+    navigate('/tests');
   };
+
+  const existingTest = (() => {
+    const storedTests = localStorage.getItem('tests');
+    const tests = storedTests ? JSON.parse(storedTests) : [];
+    const testId = window.location.pathname.split('/').pop(); // Extracts the test ID from the URL.
+    return tests.find((test: { id: string }) => test.id === testId);
+  })();
+
+  if (!existingTest) {
+    return <div>Test not found</div>;
+  }
 
   return <TestForm test={existingTest} onSave={handleSave} />;
 };

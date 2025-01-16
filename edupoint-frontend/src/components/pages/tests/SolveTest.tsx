@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { TextField, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, Button, Box, Card, CardContent, Typography, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, CardHeader } from '@mui/material';
 import MainContent from '../../mainContent/MainContent';
-import { spacing } from '../../../styles/constants';
+import { colors, fontSize, spacing } from '../../../styles/constants';
 
 interface Question {
     id: number;
@@ -11,17 +11,20 @@ interface Question {
     options?: string[];
 }
 
-const questions: Question[] = [
-    { id: 1, type: 'text', question: 'What is your name?' },
-    { id: 2, type: 'multipleChoice', question: 'What is the capital of France?', options: ['A. Berlin', 'B. Madrid', 'C. Paris', 'D. Rome'] },
-];
-
 const SolveTest: React.FC = () => {
+    const { testId } = useParams<{ testId: string }>();
+    const [test, setTest] = useState<{ id: string, name: string, questions: Question[] } | null>(null);
     const [answers, setAnswers] = useState<{ [key: number]: string }>({});
     const [openModal, setOpenModal] = useState(false);
     const [openScoreModal, setOpenScoreModal] = useState(false);
 
-    const { testId } = useParams<{ testId: string }>();
+    useEffect(() => {
+        const storedTests = localStorage.getItem('tests');
+        const tests = storedTests ? JSON.parse(storedTests) : [];
+
+        const test = tests.find((test: { id: string }) => test.id === testId);
+        setTest(test || null);
+    }, [testId]);
 
     const handleInputChange = (id: number, value: string) => {
         setAnswers({ ...answers, [id]: value });
@@ -44,10 +47,20 @@ const SolveTest: React.FC = () => {
         setOpenScoreModal(false);
     };
 
+    if (!test) {
+        return (
+          <MainContent title="Note Not Found">
+            <p style={{ color: colors['font-header'], fontSize: fontSize.md }}>
+              The test you are looking for does not exist.
+            </p>
+          </MainContent>
+        );
+      }
+
     return (
         <MainContent title={`Solve Test #${testId}`}>
             <Box display={"flex"} flexDirection={"column"} alignItems={"flex-start"} gap={spacing.lg}>
-                {questions.map((question) => (
+                {test.questions.map((question) => (
                     <Card key={question.id}>
                         <CardHeader title={`Question ${question.question}`} />
                         <CardContent>
@@ -99,10 +112,10 @@ const SolveTest: React.FC = () => {
                 open={openScoreModal}
                 onClose={handleScoreModalClose}
             >
-                <DialogTitle>Test Score</DialogTitle>
+                <DialogTitle>You finished</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Your score is 100%.
+                        Your answers have been submitted.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

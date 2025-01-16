@@ -12,12 +12,12 @@ interface Question {
   question: string;
   options?: string[];
 }
-
 export interface Test {
-  id?: number;
+  id?: string;
   name: string;
-  questions: Question[];
+  questions: { id: number; type: 'text' | 'multipleChoice'; question: string; options?: string[] }[];
 }
+
 
 interface CreateTestProps {
   test?: Test;
