@@ -46,7 +46,7 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
     }
   }, [test]);
 
-  const hasUnsavedChanges = testName !== test?.name || questions.some(q => q.question !== test?.questions.find(tq => tq.id === q.id)?.question);
+  const hasUnsavedChanges = (testName || '') !== (test?.name || '') || questions.some(q => (q.question || '') !== (test?.questions.find(tq => tq.id === q.id)?.question || ''));
 
   const addQuestion = () => {
     setQuestions((prev) => [
@@ -124,7 +124,8 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
       const newTest: Test = { id: test?.id, name: testName, questions };
       if (onSave) onSave(newTest);
       setToast({ open: true, message: 'Test saved successfully!', severity: 'success' });
-      setTimeout(() => navigate('/flashcards'), 1500);
+      setTimeout(() => navigate('/tests'), 1500);
+      setIsSaveDialogOpen(false);
     } else {
       setToast({ open: true, message: 'Please fix the errors before saving.', severity: 'error' });
     }
@@ -259,7 +260,7 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
         >
             <Button
             color="secondary"
-            onClick={() => setIsNavigateDialogOpen(true)}
+            onClick={hasUnsavedChanges ? () => setIsNavigateDialogOpen(true) : () => navigate('/flashcards')}
           >
             Cancel
           </Button>

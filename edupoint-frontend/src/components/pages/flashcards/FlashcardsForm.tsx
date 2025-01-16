@@ -32,6 +32,8 @@ const FlashcardsForm: React.FC<FlashcardsFormProps> = ({ flashcardSet, onSave })
 
   const navigate = useNavigate();
 
+  const hasUnsavedChanges = (setName || '') !== (flashcardSet?.name || '') || flashcards.length !== (flashcardSet?.flashcards.length || 0);
+
   useEffect(() => {
     if (flashcardSet) {
       setSetName(flashcardSet.name);
@@ -81,6 +83,7 @@ const FlashcardsForm: React.FC<FlashcardsFormProps> = ({ flashcardSet, onSave })
       if (onSave) onSave(newFlashcardSet);
       setToast({ open: true, message: 'Flashcard set saved successfully!', severity: 'success' });
       setTimeout(() => navigate('/flashcards'), 1500); 
+      setIsSaveDialogOpen(false);
     } else {
       setToast({ open: true, message: 'Please fix the errors before saving.', severity: 'error' });
     }
@@ -179,7 +182,7 @@ const FlashcardsForm: React.FC<FlashcardsFormProps> = ({ flashcardSet, onSave })
           <Button
             variant="contained"
             color="secondary"
-            onClick={handleOpenNavigateDialog}
+            onClick={hasUnsavedChanges ? handleOpenNavigateDialog : () => navigate('/flashcards')}
           >
             Cancel
           </Button>

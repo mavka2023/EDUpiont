@@ -28,7 +28,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ note, onSave }) => {
   const [isNavigateDialogOpen, setIsNavigateDialogOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const hasUnsavedChanges = noteTitle !== note?.title || noteContent !== note?.content;
+  const hasUnsavedChanges = (noteTitle || '') !== (note?.title || '') || (noteContent || '') !== (note?.content || '');
 
   const validateInputs = () => {
     const newErrors: { title?: string; content?: string } = {};
@@ -48,6 +48,7 @@ const NoteForm: React.FC<NoteFormProps> = ({ note, onSave }) => {
       if (onSave) onSave(newNote);
       setToast({ open: true, message: 'Note saved successfully!', severity: 'success' });
       setTimeout(() => navigate('/notes'), 1500);
+      setIsSaveDialogOpen(false);
     } else {
       setToast({ open: true, message: 'Please fix the errors before saving.', severity: 'error' });
     }
@@ -113,11 +114,11 @@ const NoteForm: React.FC<NoteFormProps> = ({ note, onSave }) => {
           </CardContent>
         </Card>
         
-        <Box display="flex" justifyContent="space-between">
+        <Box display="flex" justifyContent="space-between"> 
           <Button
             variant="contained"
             color="secondary"
-            onClick={handleOpenNavigateDialog}
+            onClick={hasUnsavedChanges ? handleOpenNavigateDialog : () => navigate('/notes')}
           >
             Cancel
           </Button>

@@ -15,6 +15,7 @@ export interface ListItemProps {
   modalText?: string;
   confrimationModalTitle?: string;
   modalButtonText?: string;
+  onDelete?: () => void;
 }
 
 const List: React.FC<{ items: ListItemProps[] }> = ({ items: givenItems }) => {
@@ -75,14 +76,14 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items: givenItems }) => {
 
   const handleDeleteConfirm = () => {
     if (deleteIndex !== null) {
-      console.log(`Deleting item at index ${deleteIndex}`);
+      items[deleteIndex].onDelete?.();
       setItems(items.filter((_, index) => index.toString() !== selectedID));
     }
     handleDeleteModalClose();
   };
 
   const handleCopyLink = (link: string) => {
-    navigator.clipboard.writeText(window.location.href + "/" + link.split("/")[link.split("/").length-1])
+    navigator.clipboard.writeText(window.location.href + "/" + link.split("/").pop())
       .then(() => {
         setToast({ open: true, message: 'Link copied to clipboard!', severity: 'success' });
       })
@@ -100,7 +101,7 @@ const List: React.FC<{ items: ListItemProps[] }> = ({ items: givenItems }) => {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={() => handleCopyLink(link)}>Copy link</MenuItem>
-      <MenuItem onClick={() => { handleMenuClose(); navigate(`edit/${index}`); }}>Edit</MenuItem>
+      <MenuItem onClick={() => { handleMenuClose(); navigate(`edit/${link.split("/").pop()}`); }}>Edit</MenuItem>
       <MenuItem onClick={() => { handleMenuClose(); handleDeleteModalOpen(index); }}>Delete</MenuItem>
     </Menu>
   );
