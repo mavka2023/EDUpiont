@@ -12,12 +12,6 @@ interface Flashcard {
     answer: string;
 }
 
-const mockFlashcards: Flashcard[] = [
-    { id: 1, question: 'What is React?', answer: 'A JavaScript library for building user interfaces.' },
-    { id: 2, question: 'What is JSX?', answer: 'A syntax extension for JavaScript that looks like HTML.' },
-    { id: 3, question: 'What is a component in React?', answer: 'A reusable UI element that can be a function or class.' },
-];
-
 const ViewFlashcardSet: React.FC = () => {
     const { flashcardsId } = useParams<{ flashcardsId: string }>();
     const [flashcards, setFlashcards] = useState<Flashcard[]>([]);
@@ -25,7 +19,11 @@ const ViewFlashcardSet: React.FC = () => {
     const [flipped, setFlipped] = useState<boolean>(false);
 
     useEffect(() => {
-        setFlashcards(mockFlashcards);
+        const storedFlashcards = localStorage.getItem('flashcards');
+        const allFlashcardSets = storedFlashcards ? JSON.parse(storedFlashcards) : [];
+        const flashcardSet = allFlashcardSets.find((set: { id: string }) => set.id === flashcardsId);
+
+        setFlashcards(flashcardSet ? flashcardSet.flashcards : []);
     }, [flashcardsId]);
 
     if (flashcards.length === 0) return <></>; 
@@ -74,6 +72,7 @@ const ViewFlashcardSet: React.FC = () => {
         </MainContent>
     );
 };
+
 
 const FlashcardContainer = styled.div`
     display: flex;
