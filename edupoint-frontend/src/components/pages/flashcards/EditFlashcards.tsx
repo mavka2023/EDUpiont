@@ -16,8 +16,6 @@ const EditFlashcards: React.FC = () => {
       flashcards[setIndex] = { ...updatedFlashcardSet, id: flashcards[setIndex].id };
       localStorage.setItem('flashcards', JSON.stringify(flashcards));
     }
-
-    navigate('/flashcards');
   };
 
   const existingFlashcardSet = (() => {

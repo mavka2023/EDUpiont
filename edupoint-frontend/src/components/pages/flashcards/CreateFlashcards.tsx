@@ -14,7 +14,6 @@ const CreateFlashcards: React.FC = () => {
     const updatedFlashcards = [...flashcards, newFlashcardSet];
 
     localStorage.setItem('flashcards', JSON.stringify(updatedFlashcards));
-    navigate('/flashcards');
   };
 
   return <FlashcardsForm onSave={handleSave} />;

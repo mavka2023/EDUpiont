@@ -10,6 +10,15 @@ a {
   cursor: pointer;
 }
 
+span:has(.Mui-disabled) {
+  cursor: not-allowed!important;
+  opacity: 0.6!important;
+}
+
+.Mui-disabled {
+  cursor: not-allowed!important;
+}
+
 .MuiSnackbar-root > div {
   background-color: #4cc250 !important;
   color: #ffffff !important;

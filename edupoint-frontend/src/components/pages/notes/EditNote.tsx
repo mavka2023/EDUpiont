@@ -15,8 +15,6 @@ const EditNote: React.FC = () => {
       notes[noteIndex] = { ...updatedNote, link: notes[noteIndex].link};
       localStorage.setItem('notes', JSON.stringify(notes));
     }
-
-    navigate('/notes');
   };
 
   const existingNote = (() => {

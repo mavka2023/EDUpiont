@@ -14,7 +14,6 @@ const CreateTest: React.FC = () => {
     const updatedTests = [...tests, newTest];
 
     localStorage.setItem('tests', JSON.stringify(updatedTests));
-    navigate('/tests');
   };
 
   return <TestForm onSave={handleSave} />;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, TextField, Card, CardContent, IconButton, Select, MenuItem, CardHeader, Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText } from '@mui/material';
+import { Box, Button, TextField, Card, CardContent, IconButton, Select, MenuItem, CardHeader, Snackbar, Alert, Dialog, DialogActions, DialogContent, DialogTitle, DialogContentText, Tooltip } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MainContent from '../../mainContent/MainContent';
@@ -214,16 +214,25 @@ const CreateTest: React.FC<CreateTestProps> = ({ test, onSave }) => {
                       helperText={errors[`${question.id}-${index}`]}
                     />
                   ))}
-                {question.type === 'multipleChoice' && (
-                  <Button
-                    color="secondary"
-                    onClick={() => addOption(question.id)}
-                    disabled={(question.options?.length || 0) >= 4}
-                    size="small"
-                  >
-                    Add Option
-                  </Button>
-                )}
+                {question.type === 'multipleChoice' &&
+                  question.options && (<Tooltip
+                  title={
+                    (question.options?.length || 0) >= 4
+                      ? 'Only 4 options are allowed'
+                      : ''
+                  }
+                >
+                  <span>
+                    <Button
+                      color="secondary"
+                      onClick={() => addOption(question.id)}
+                      disabled={(question.options?.length || 0) >= 4}
+                      size="small"
+                    >
+                      Add Option
+                    </Button>
+                  </span>
+                </Tooltip>)}
               </Box>
             </CardContent>
           </Card>

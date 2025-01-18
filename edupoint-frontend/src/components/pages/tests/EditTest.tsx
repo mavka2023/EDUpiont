@@ -16,8 +16,6 @@ const EditTest: React.FC = () => {
       tests[testIndex] = updatedTest;
       localStorage.setItem('tests', JSON.stringify(tests));
     }
-
-    navigate('/tests');
   };
 
   const existingTest = (() => {
