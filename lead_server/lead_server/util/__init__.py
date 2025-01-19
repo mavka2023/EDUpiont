@@ -1,1 +1,0 @@
-from .authenticator import jwt_gateway_factory
